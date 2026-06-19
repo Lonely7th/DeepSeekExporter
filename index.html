@@ -1,416 +1,932 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
-
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DeepSeek Exporter - 轻松沉淀 DeepSeek 智慧，一键导出多种格式</title>
+    <style>
+        :root {
+            --primary-color: #4D6BFE;
+            --primary-hover: #3a55e0;
+            --secondary-color: #8B5CF6; /* 紫色辅助色 */
+            --text-main: #1F2937;
+            --text-secondary: #6B7280;
+            --bg-white: #FFFFFF;
+            --bg-light: #F8F9FA;
+            --border-color: #E5E7EB;
+            --card-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+            --card-shadow-hover: 0 12px 40px rgba(77, 107, 254, 0.2);
+            --gradient-primary: linear-gradient(135deg, #4D6BFE 0%, #8B5CF6 100%);
+            --gradient-bg: linear-gradient(180deg, #F0F6FF 0%, #FFFFFF 100%);
+        }
 
-  <meta property="og:title" content="AI转换助手 - AI对话转Word">
-  <meta property="og:description"
-    content="AI对话转Word、Markdown转Word、LaTeX转Word一站完成。兼容DeepSeek、Kimi、千问、豆包、ChatGPT、Gemini、Grok等主流AI平台，支持LaTeX公式和Mermaid图。 隐私安全，全端通用，专家级技术团队全程支持，最专业的AI对话导出工具。">
-  <meta property="og:site_name" content="AI转换助手">
-  <meta property="og:url" content="https://www.aitoword.chat/">
-  <meta property="og:type" content="website">
-  <meta property="og:locale" content="zh_CN">
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-  <meta name="keywords" content="AI对话转Word,LaTeX转Word,Markdown转Word,兼容主流AI平台,Markdown转Excel,AI内容转Word,AI内容转PDF">
-  <link rel="canonical" href="https://www.aitoword.chat/">
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "PingFang SC", "Microsoft YaHei", sans-serif;
+            color: var(--text-main);
+            background-color: var(--bg-white);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
 
-  <title>AI转换助手 - AIToWord | LaTeX公式转Word | AI对话转Word</title>
-  <meta name="description"
-    content="AIToWord，AI对话转Word、Markdown转Word、LaTeX转Word一站完成。兼容DeepSeek、Kimi、千问、豆包、ChatGPT、Gemini、Grok等主流AI平台，支持LaTeX公式和Mermaid图。 隐私安全，全端通用，专家级技术团队全程支持，最专业的AI对话导出工具。" />
-  <link rel="icon"
-    href="https://7365-seekservice-9gkeeztlfcb2a6d4-1301441002.tcb.qcloud.la/docxai-logo-3.png?sign=53048c33e478b4bd6f70a441f5f65bfc&t=1774510155" />
-  <link rel="apple-touch-icon"
-    href="https://7365-seekservice-9gkeeztlfcb2a6d4-1301441002.tcb.qcloud.la/docxai-logo-3.png?sign=53048c33e478b4bd6f70a441f5f65bfc&t=1774510155" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link
-    href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&family=Space+Grotesk:wght@400;500;600;700&display=swap"
-    rel="stylesheet" />
-  <link rel="stylesheet" href="styles.css" />
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Navbar */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            transition: all 0.3s ease;
+            padding: 20px 0;
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid transparent;
+        }
+
+        .navbar.scrolled {
+            border-bottom: 1px solid rgba(255, 255, 255, 0.8);
+            box-shadow: 0 4px 30px rgba(0,0,0,0.04);
+            padding: 12px 0;
+        }
+
+        .nav-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: #000000;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 32px;
+        }
+
+        .nav-links a {
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            transition: color 0.2s;
+            position: relative;
+        }
+
+        .nav-links a:not(.btn):hover {
+            color: var(--primary-color);
+        }
+        
+        .nav-links a:not(.btn)::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--gradient-primary);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:not(.btn):hover::after {
+            width: 100%;
+        }
+
+        /* Buttons with Glow & Shine Effect */
+        .btn {
+            padding: 12px 28px;
+            border-radius: 10px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-primary {
+            background: var(--gradient-primary);
+            color: white;
+            border: none;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(77, 107, 254, 0.5);
+        }
+
+        /* Shine sweep effect */
+        .btn-primary::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(120deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: all 0.6s;
+        }
+
+        .btn-primary:hover::before {
+            left: 100%;
+        }
+
+        .btn-outline {
+            background-color: rgba(255, 255, 255, 0.6);
+            color: var(--primary-color);
+            border: 1px solid rgba(77, 107, 254, 0.3);
+        }
+
+        .btn-outline:hover {
+            background-color: white;
+            border-color: var(--primary-color);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(77, 107, 254, 0.1);
+        }
+
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            z-index: 1001;
+        }
+
+        .menu-toggle span {
+            width: 24px;
+            height: 2px;
+            background: var(--text-main);
+            transition: 0.3s;
+        }
+
+        /* Hero Section with Tech Background */
+        .hero {
+            padding: 180px 0 80px;
+            text-align: center;
+            background: var(--gradient-bg);
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Grid Pattern */
+        .hero::before {
+            content: "";
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background-image: linear-gradient(rgba(77, 107, 254, 0.05) 1px, transparent 1px),
+                              linear-gradient(90deg, rgba(77, 107, 254, 0.05) 1px, transparent 1px);
+            background-size: 40px 40px;
+            mask-image: radial-gradient(ellipse 80% 80% at 50% 0%, #000 70%, transparent 100%);
+            -webkit-mask-image: radial-gradient(ellipse 80% 80% at 50% 0%, #000 70%, transparent 100%);
+            z-index: 1;
+        }
+
+        /* Floating Blobs */
+        .blob {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            z-index: 0;
+            animation: float 10s infinite ease-in-out;
+        }
+        .blob-1 { width: 500px; height: 500px; background: rgba(77, 107, 254, 0.15); top: -100px; left: -100px; }
+        .blob-2 { width: 400px; height: 400px; background: rgba(139, 92, 246, 0.15); bottom: -50px; right: -50px; animation-delay: -5s; }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            50% { transform: translate(30px, 30px) scale(1.1); }
+        }
+
+        .hero h1 {
+            font-size: 3.2rem;
+            font-weight: 800;
+            margin-bottom: 24px;
+            line-height: 1.2;
+            letter-spacing: -1px;
+        }
+
+        .hero h1 span {
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: inline-block;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            max-width: 720px;
+            margin: 0 auto 40px;
+        }
+
+        .hero-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 16px;
+            margin-bottom: 20px;
+        }
+
+        .hero-cta-link {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            display: inline-block;
+            margin-top: 16px;
+            transition: color 0.2s;
+        }
+        
+        .hero-cta-link:hover { color: var(--primary-color); }
+
+        /* Image Placeholder with Glow Border */
+        .image-placeholder {
+            background-color: rgba(255, 255, 255, 0.5);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            min-height: 400px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #64748B;
+            font-size: 0.9rem;
+            margin-top: 60px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.1);
+            width: 100%;
+            max-width: 900px;
+            margin-left: auto;
+            margin-right: auto;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        /* Animated glowing border */
+        .image-placeholder::after {
+            content: '';
+            position: absolute;
+            top: -2px; left: -2px; right: -2px; bottom: -2px;
+            background: var(--gradient-primary);
+            z-index: -1;
+            border-radius: 18px;
+            opacity: 0;
+            filter: blur(10px);
+            transition: opacity 0.3s;
+        }
+        
+        .image-placeholder:hover::after {
+            opacity: 0.6;
+        }
+
+        /* Generic Section Styles */
+        section {
+            padding: 100px 0;
+            position: relative;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 16px;
+            letter-spacing: -0.5px;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            max-width: 640px;
+            margin: 0 auto 64px;
+        }
+
+        /* Install Section */
+        .install-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 24px;
+        }
+
+        .browser-card {
+            background: rgba(255, 255, 255, 0.8);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 32px 24px;
+            text-align: center;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        /* Background shine on hover */
+        .browser-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 4px;
+            background: var(--gradient-primary);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.4s;
+        }
+
+        .browser-card:hover {
+            border-color: transparent;
+            box-shadow: var(--card-shadow-hover);
+            transform: translateY(-8px);
+            background: white;
+        }
+        
+        .browser-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .browser-icon {
+            width: 64px;
+            height: 64px;
+            background: var(--bg-light);
+            border-radius: 50%;
+            margin: 0 auto 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            transition: transform 0.3s;
+        }
+
+        .browser-card:hover .browser-icon {
+            transform: scale(1.1) rotate(5deg);
+            background: rgba(77, 107, 254, 0.1);
+        }
+
+        .browser-card h3 {
+            font-size: 1.1rem;
+            margin-bottom: 8px;
+        }
+
+        .browser-card p {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            margin-bottom: 24px;
+            min-height: 48px;
+        }
+
+        /* Pain Points */
+        .pain-points {
+            background-color: var(--bg-light);
+        }
+
+        .cards-grid-3 {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 32px;
+        }
+
+        .point-card {
+            background: white;
+            padding: 36px;
+            border-radius: 16px;
+            border: 1px solid transparent;
+            box-shadow: var(--card-shadow);
+            transition: all 0.3s;
+        }
+
+        .point-card:hover {
+            border-color: rgba(77, 107, 254, 0.3);
+            transform: translateY(-5px);
+        }
+
+        .point-icon {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            display: inline-block;
+        }
+
+        .point-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 12px;
+        }
+
+        .point-card p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
+        /* Features Section */
+        .feature-item {
+            display: flex;
+            align-items: center;
+            gap: 80px;
+            margin-bottom: 120px;
+        }
+
+        .feature-item:last-child { margin-bottom: 0; }
+        .feature-item.reverse { flex-direction: row-reverse; }
+
+        .feature-text h3 {
+            font-size: 2rem;
+            margin-bottom: 24px;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: inline-block;
+        }
+
+        .feature-text p {
+            color: var(--text-secondary);
+            font-size: 1.05rem;
+            line-height: 1.8;
+        }
+
+        .feature-img {
+            flex: 1;
+            min-height: 360px;
+        }
+
+        /* Scenarios */
+        .scenarios { background-color: var(--bg-light); }
+
+        .scenario-card {
+            background: white;
+            padding: 36px;
+            border-radius: 16px;
+            box-shadow: var(--card-shadow);
+            transition: all 0.3s;
+            border-top: 4px solid transparent;
+        }
+        
+        .scenario-card:hover {
+            transform: translateY(-5px);
+            border-top-color: var(--primary-color);
+            box-shadow: var(--card-shadow-hover);
+        }
+
+        .scenario-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 12px;
+        }
+
+        .scenario-card p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
+        /* Privacy Section with High Tech Vibe */
+        .privacy-section {
+            background: radial-gradient(circle at top left, #4D6BFE, #2A3990 80%);
+            color: white;
+            border-radius: 24px;
+            padding: 80px 40px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 20px 50px rgba(42, 57, 144, 0.3);
+        }
+        
+        /* Glowing dots decoration */
+        .privacy-section::before, .privacy-section::after {
+            content: '';
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.1);
+        }
+        .privacy-section::before { width: 300px; height: 300px; top: -150px; right: -50px; }
+        .privacy-section::after { width: 200px; height: 200px; bottom: -100px; left: -50px; }
+
+        .privacy-section h2 {
+            font-size: 2.8rem;
+            margin-bottom: 24px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .privacy-section p {
+            font-size: 1.1rem;
+            max-width: 700px;
+            margin: 0 auto;
+            opacity: 0.9;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Bottom CTA */
+        .cta-section { text-align: center; }
+
+        /* Footer */
+        footer {
+            background-color: #111827;
+            color: #9CA3AF;
+            padding: 60px 0 30px;
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-col h4 {
+            color: white;
+            margin-bottom: 16px;
+            font-size: 1rem;
+        }
+
+        .footer-col a {
+            display: block;
+            margin-bottom: 10px;
+            font-size: 0.9rem;
+            color: #9CA3AF;
+            transition: color 0.2s;
+        }
+
+        .footer-col a:hover { color: var(--primary-color); }
+
+        .footer-bottom {
+            border-top: 1px solid #374151;
+            padding-top: 30px;
+            text-align: center;
+            font-size: 0.85rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 968px) {
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 70px;
+                left: 0;
+                width: 100%;
+                background: white;
+                flex-direction: column;
+                padding: 20px;
+                box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            }
+            .nav-links.active { display: flex; }
+            .menu-toggle { display: flex; }
+            .hero h1 { font-size: 2.5rem; }
+            .install-grid { grid-template-columns: repeat(2, 1fr); }
+            .cards-grid-3 { grid-template-columns: 1fr; }
+            .feature-item, .feature-item.reverse {
+                flex-direction: column;
+                gap: 40px;
+            }
+            .feature-text { text-align: center; }
+            .feature-img { width: 100%; }
+        }
+
+        @media (max-width: 600px) {
+            .install-grid { grid-template-columns: 1fr; }
+            .hero-buttons { flex-direction: column; gap: 12px; }
+            .btn { width: 100%; }
+            .section-title { font-size: 2rem; }
+            .privacy-section { padding: 50px 20px; }
+            .privacy-section h2 { font-size: 2rem; }
+        }
+
+        /* Scroll Animation */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.8s ease-out, transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
 </head>
-
 <body>
 
-  <!-- 全新设计的头部：毛玻璃+精致边框 -->
-  <header class="site-header">
-    <div class="container header-inner">
-      <div class="brand">
-        <img
-          src="https://7365-seekservice-9gkeeztlfcb2a6d4-1301441002.tcb.qcloud.la/web_res/logo-2026-04-01-006.png?sign=7559bf7e9a6dcdb996e9ed793d5d4d61&t=1775034574"
-          alt="AI转换助手" />
-      </div>
-      <nav class="nav-links">
-        <a href="#features">产品优势</a>
-        <a href="#platforms">全端通用</a>
-        <a href="#plugins">浏览器插件</a>
-        <a href="#support">帮助中心</a>
-      </nav>
-      <a class="btn-primary" href="https://www.aiwhaler.com/" target="_blank" rel="noreferrer">立即使用</a>
-    </div>
-  </header>
-
-  <main>
-    <!-- Hero 区域：全新不对称网格 + 浮动装饰元素 -->
-    <section class="hero">
-      <div class="container hero-wrapper">
-        <div class="hero-content">
-          <span class="badge-glow">✨ AI转换助手 - AIToWord | 最专业的AI对话导出工具</span>
-          <h1 class="hero-title">AI 对话一键导出<br>Word、PDF、Excel文档</h1>
-          <p class="hero-description">
-            兼容DeepSeek、豆包、ChatGPT、Gemini等主流AI平台，支持LaTeX数学公式、物理公式、化学方程式、Mermaid流程图，完整保留格式排版，快速导出Word、PDF、Excel文档，隐私安全，全端通用，专家级技术团队全程支持
-          </p>
-          <div class="hero-buttons">
-            <a class="btn-primary btn-large" href="https://www.aiwhaler.com/" target="_blank"
-              rel="noreferrer">网页端在线使用</a>
-            <a class="btn-outline" href="#download">下载 App</a>
-            <a class="btn-ghost" href="#plugins">安装插件</a>
-          </div>
-        </div>
-        <div class="hero-visual">
-          <div class="floating-card">
-            <img class="feature-preview" src="images/lowcode-2451411.png" alt="AI转换助手交付能力展示" />
-            <div class="feature-stack">
-              <div class="stack-row">
-                <div class="stack-icon">📄</div>
-                <div><strong>AI对话转Word</strong><span>一键导出，内容精准，排版工整</span></div>
-              </div>
-              <div class="stack-row">
-                <div class="stack-icon">📐</div>
-                <div><strong>支持LaTeX公式</strong><span>数学公式·物理公式·化学方程式</span></div>
-              </div>
-              <div class="stack-row">
-                <div class="stack-icon">🌐</div>
-                <div><strong>全端通用</strong><span>在线网页/App/微信小程序/浏览器插件</span></div>
-              </div>
+    <!-- Navbar -->
+    <nav class="navbar" id="navbar">
+        <div class="container nav-content">
+            <a href="#" class="logo">
+                <img src="images/logo.png" style="width: 40px; height: 40px;"> DeepSeek Exporter
+            </a>
+            <div class="nav-links" id="navLinks">
+                <a href="#install">安装插件</a>
+                <a href="#features">功能特性</a>
+                <a href="#scenarios">应用场景</a>
+                <a href="https://www.aiwhaler.com/" target="_blank" class="btn btn-primary" style="color: #fff;">在线使用</a>
             </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- 兼容性测评 全新卡片式表格 -->
-    <section id="compatibility" class="section section-light">
-      <div class="container">
-        <div class="section-header">
-          <h2>主流AI平台兼容性测评</h2>
-          <p>截止2026年02月02日，AI转换助手 对各大主流 AI 平台的 Markdown 转 Word 能力测评</p>
-        </div>
-        <div class="glass-table">
-          <div class="table-responsive">
-            <table class="modern-table">
-              <thead>
-                <tr>
-                  <th>AI平台</th>
-                  <th>Markdown(无公式)</th>
-                  <th>Markdown(有公式)</th>
-                  <th>Markdown(有Mermaid图)</th>
-                  <th>Markdown(无Mermaid图)</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>DeepSeek</td>
-                  <td>完全支持</td>
-                  <td>完全支持</td>
-                  <td>完全支持</td>
-                  <td>完全支持</td>
-                </tr>
-                <tr>
-                  <td>豆包</td>
-                  <td>完全支持</td>
-                  <td>完全支持</td>
-                  <td>完全支持</td>
-                  <td>完全支持</td>
-                </tr>
-                <tr>
-                  <td>Kimi</td>
-                  <td>完全支持</td>
-                  <td>部分支持</td>
-                  <td>部分支持</td>
-                  <td>完全支持</td>
-                </tr>
-                <tr>
-                  <td>通义千问</td>
-                  <td>完全支持</td>
-                  <td>部分支持</td>
-                  <td>完全支持</td>
-                  <td>完全支持</td>
-                </tr>
-                <tr>
-                  <td>智谱清言</td>
-                  <td>完全支持</td>
-                  <td>部分支持</td>
-                  <td>完全支持</td>
-                  <td>完全支持</td>
-                </tr>
-                <tr>
-                  <td>ChatGPT</td>
-                  <td>完全支持</td>
-                  <td>完全支持</td>
-                  <td>完全支持</td>
-                  <td>完全支持</td>
-                </tr>
-                <tr>
-                  <td>Gemini</td>
-                  <td>完全支持</td>
-                  <td>完全支持</td>
-                  <td>完全支持</td>
-                  <td>完全支持</td>
-                </tr>
-                <tr>
-                  <td>Grok</td>
-                  <td>完全支持</td>
-                  <td>部分支持</td>
-                  <td>完全支持</td>
-                  <td>完全支持</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- 插件生态 卡片全新布局 + 悬浮动效 -->
-    <section id="plugins" class="section">
-      <div class="container">
-        <div class="section-header">
-          <h2>浏览器插件生态</h2>
-          <p>AI转换助手针对各大主流 AI 平台推出了专用插件，服务更专业，兼容性更强</p>
-        </div>
-        <div class="plugin-card-new">
-          <div class="plugin-icon"><img src="images/ai2word-logo.png" alt="DeepSeek 插件 Logo" /></div>
-          <h3>通用版插件</h3>
-          <p>一键将AI生成的 Markdown 内容和 Latex 公式导出为 Word、PDF、Excel 文档，支持 DeepSeek、豆包、ChatGPT、Gemini 等主流AI平台</p>
-          <a href="https://www.aiwhaler.com/plugin/" target="_blank" rel="noreferrer">立即体验 →</a>
-        </div>
-        <div class="plugin-grid">
-          <div class="plugin-card-new">
-            <div class="plugin-icon"><img
-                src="https://seekservice-9gkeeztlfcb2a6d4-1301441002.tcloudbaseapp.com/resources/2025-12/lowcode-2411744"
-                alt="DeepSeek 插件 Logo" /></div>
-            <h3>DeepSeek 插件</h3>
-            <p>AI对话一键转文档</p>
-            <a href="https://deepseek.aiwhaler.com/" target="_blank" rel="noreferrer">立即体验 →</a>
-          </div>
-          <div class="plugin-card-new">
-            <div class="plugin-icon"><img
-                src="https://seekservice-9gkeeztlfcb2a6d4-1301441002.tcloudbaseapp.com/resources/2025-12/lowcode-2411736"
-                alt="豆包插件 Logo" /></div>
-            <h3>豆包插件</h3>
-            <p>LaTeX公式不乱码</p>
-            <a href="https://doubao.aiwhaler.com/" target="_blank" rel="noreferrer">立即体验 →</a>
-          </div>
-          <div class="plugin-card-new">
-            <div class="plugin-icon"><img
-                src="https://seekservice-9gkeeztlfcb2a6d4-1301441002.tcloudbaseapp.com/resources/2026-01/lowcode-2421671"
-                alt="Gemini 插件 Logo" /></div>
-            <h3>Gemini 插件</h3>
-            <p>支持各种复杂Mermaid图</p>
-            <a href="https://gemini.aiwhaler.com/" target="_blank" rel="noreferrer">立即体验 →</a>
-          </div>
-          <div class="plugin-card-new">
-            <div class="plugin-icon"><img
-                src="https://seekservice-9gkeeztlfcb2a6d4-1301441002.tcloudbaseapp.com/resources/2026-01/lowcode-2421670"
-                alt="ChatGPT 插件 Logo" /></div>
-            <h3>ChatGPT 插件</h3>
-            <p>全程支持，数据安全</p>
-            <a href="https://chatgpt.aiwhaler.com/" target="_blank" rel="noreferrer">立即体验 →</a>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- 多端支持 + 二维码 全新左右布局，视觉重构 -->
-    <section id="platforms" class="section section-gradient-alt">
-      <div class="container platforms-modern">
-        <div class="platforms-info">
-          <h2>全渠道覆盖，随时随地导出文档</h2>
-          <p>网页、App、小程序与浏览器插件全覆盖，为不同使用场景提供一致体验。</p>
-          <img class="feature-preview" src="images/lowcode-2451410.png" alt="AI转换助手交付能力展示" />
-        </div>
-        <div id="download" class="qr-modern">
-          <div class="qr-title">扫码使用</div>
-          <p>App 与小程序二维码快速获取。</p>
-          <div class="qr-dual">
-            <div class="qr-item"><img
-                src="https://seekservice-9gkeeztlfcb2a6d4-1301441002.tcloudbaseapp.com/resources/2026-01/lowcode-2421725"
-                alt="AI转换助手App二维码" /><span>App 下载</span></div>
-            <div class="qr-item"><img
-                src="https://seekservice-9gkeeztlfcb2a6d4-1301441002.tcloudbaseapp.com/resources/2025-12/lowcode-2403874"
-                alt="AI转换助手小程序二维码" /><span>小程序</span></div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- 产品优势 全新卡片与关键词标签整合 -->
-    <section id="features" class="section">
-      <div class="container">
-        <div class="section-header">
-          <h2>为什么选择 AI转换助手？</h2>
-        </div>
-        <div class="features-grid">
-          <div class="feature-item">
-            <div class="feature-icon"><img
-                src="https://seekservice-9gkeeztlfcb2a6d4-1301441002.tcloudbaseapp.com/resources/2026-02/lowcode-2424003"
-                alt="数据安全" /></div>
-            <h3>隐私安全</h3>
-            <p>对接云数据安全系统，全面保障您的信息隐私与数据安全。</p>
-          </div>
-          <div class="feature-item">
-            <div class="feature-icon"><img
-                src="https://seekservice-9gkeeztlfcb2a6d4-1301441002.tcloudbaseapp.com/resources/2026-02/lowcode-2424006"
-                alt="全程支持" /></div>
-            <h3>全程支持</h3>
-            <p>专家级技术团队全程在线支持，随时解决您的疑难问题。</p>
-          </div>
-          <div class="feature-item">
-            <div class="feature-icon"><img
-                src="https://seekservice-9gkeeztlfcb2a6d4-1301441002.tcloudbaseapp.com/resources/2026-02/lowcode-2424004"
-                alt="持续升级" /></div>
-            <h3>持续升级</h3>
-            <p>专业研发团队持续迭代产品功能，不断提升产品的兼容性。</p>
-          </div>
-          <div class="feature-item">
-            <div class="feature-icon"><img
-                src="https://seekservice-9gkeeztlfcb2a6d4-1301441002.tcloudbaseapp.com/resources/2026-02/lowcode-2424005"
-                alt="多端通用" /></div>
-            <h3>多端通用</h3>
-            <p>在线网页、App、小程序、浏览器插件通用，满足您对不同场景使用需求。</p>
-          </div>
-        </div>
-        <div class="keyword-cloud">
-          <span class="keyword">AI对话转Word</span><span class="keyword">LaTeX转Word</span><span
-            class="keyword">Markdown转Word</span><span class="keyword">兼容主流AI平台</span><span
-            class="keyword">Markdown转Excel</span><span class="keyword">AI内容转Word</span><span
-            class="keyword">AI内容转PDF</span>
-        </div>
-      </div>
-    </section>
-
-    <!-- FAQ 模块 全新折叠面板风格 (内容完全一致) -->
-    <section id="faq" class="section section-faq">
-      <div class="container">
-        <div class="section-header">
-          <h2>功能介绍与常见问题</h2>
-          <p>AI转换助手 的主要功能、操作指南、以及您在使用过程中常见的问题，这里都有详细解答</p>
-        </div>
-        <div id="faq-accordion" class="faq-accordion-container"></div>
-      </div>
-    </section>
-
-    <!-- 支持团队 全新双栏 -->
-    <section id="support" class="section support-new">
-      <div class="container support-flex">
-        <div class="support-left">
-          <h2>专业技术团队全程支持</h2>
-          <p>专业技术团队为您全程护航，不断提升您的使用体验。</p>
-          <div class="support-actions">
-            <a class="btn-outline-light" href="https://www.aiwhaler.com/help/" target="_blank" rel="noreferrer">帮助中心</a>
-            <a class="btn-outline-light" href="https://www.aiwhaler.com/ua/" target="_blank" rel="noreferrer">用户协议</a>
-            <a class="btn-outline-light" href="https://www.aiwhaler.com/pp/" target="_blank" rel="noreferrer">隐私政策</a>
-          </div>
-        </div>
-        <div class="support-right">
-          <div class="social-card">
-            <h3>关注我们</h3>
-            <p>关注 AI转换助手，获取最前沿的AI资讯</p>
-            <div class="social-icons">
-              <a href="https://www.zhihu.com/people/33-44-73-12-10" target="_blank" rel="noreferrer">知乎</a>
-              <span class="wechat-trigger-new">微信公众号
-                <span class="wechat-qr-popup"><img
-                    src="https://seekservice-9gkeeztlfcb2a6d4-1301441002.tcloudbaseapp.com/resources/2025-12/lowcode-2403880"
-                    alt="公众号二维码" /></span>
-              </span>
-              <a href="https://www.xiaohongshu.com/user/profile/64b5fb93000000000b014f78?xsec_token=YBs9EIHtVuIMv2UWOAIHM7QhzUi7QojCZ7lUKYCObpTHU=&xsec_source=app_share&xhsshare=CopyLink&shareRedId=N0tGMzVLOTw2NzUyOTgwNjY0OTc5R0g7&apptime=1759463311&share_id=caa6c636cc1f49269fd532deb81e2d7a"
-                target="_blank" rel="noreferrer">小红书</a>
+            <div class="menu-toggle" onclick="toggleMenu()">
+                <span></span><span></span><span></span>
             </div>
-            <div class="contact-email"><span>联系邮箱</span><strong>aiwhaler@yeah.net</strong></div>
-          </div>
         </div>
-      </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="hero">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+        <div class="container">
+            <h1>轻松沉淀 DeepSeek 智慧<br><span>一键导出多种格式</span></h1>
+            <p>DeepSeek Exporter 是专为 DeepSeek 打造的效率插件。完美还原代码高亮、LaTeX 公式与表格层级。支持 Word、PDF、Markdown 等 7 种格式导出，让你的 AI 对话秒变专业文档。</p>
+            <div class="hero-buttons">
+                <!-- <a href="https://www.aiwhaler.com/" target="_blank" class="btn btn-primary">在线使用</a> -->
+                <a href="#install" class="btn btn-outline">⬇ 安装插件</a>
+            </div>
+            <a href="#features" class="hero-cta-link">查看功能演示 →</a>
+            
+            <div class="image-placeholder">
+                [图片占位] 建议放置插件工作流截图：左侧 DeepSeek 界面，右侧导出的精美 Word/PDF 文档
+            </div>
+        </div>
+    </header>
+
+    <!-- Install Section -->
+    <section id="install" class="fade-in">
+        <div class="container">
+            <h2 class="section-title">选择你的浏览器，一键安装</h2>
+            <p class="section-subtitle">全面支持主流浏览器，无论你常用哪一款，都能获得一致的流畅体验。</p>
+            <div class="install-grid">
+                <div class="browser-card">
+                    <div class="browser-icon">🌐</div>
+                    <h3>Chrome</h3>
+                    <p>适配 Chrome 88 及以上版本，从 Chrome 应用商店一键添加。</p>
+                    <a href="#" class="btn btn-outline" style="width:100%">添加到 Chrome</a>
+                </div>
+                <div class="browser-card">
+                    <div class="browser-icon">🟦</div>
+                    <h3>Edge</h3>
+                    <p>适配 Microsoft Edge 88 及以上版本，从 Edge 扩展商店安装。</p>
+                    <a href="#" class="btn btn-outline" style="width:100%">添加到 Edge</a>
+                </div>
+                <div class="browser-card">
+                    <div class="browser-icon">🟢</div>
+                    <h3>360 浏览器</h3>
+                    <p>适配 360 极速浏览器与 360 安全浏览器，从 360 扩展中心安装。</p>
+                    <a href="#" class="btn btn-outline" style="width:100%">添加到 360</a>
+                </div>
+                <div class="browser-card">
+                    <div class="browser-icon">🦊</div>
+                    <h3>Firefox 火狐</h3>
+                    <p>适配 Firefox 109 及以上版本，从 Firefox 附加组件商店安装。</p>
+                    <a href="#" class="btn btn-outline" style="width:100%">添加到 Firefox</a>
+                </div>
+            </div>
+            <p style="text-align:center; margin-top:32px; color:var(--text-secondary); font-size:0.9rem;">
+                不同浏览器的安装方式略有差异，若商店安装失败，可下载离线安装包手动加载。
+            </p>
+        </div>
     </section>
-  </main>
 
-  <footer class="footer">
-    <div class="container footer-inner">
-      <div class="footer-brand"><img
-          src="https://7365-seekservice-9gkeeztlfcb2a6d4-1301441002.tcb.qcloud.la/web_res/logo-2026-04-01-007.png?sign=e9c46b33f7ccac625ccbc00eb0544f15&t=1775035500"
-          alt="AI转换助手" />
-        <p style="font-size: 17px;">专家级的 AI 文案导出工具</p>
-      </div>
-      <div class="footer-links">
-        <h4>产品</h4><a href="#features">产品优势</a><a href="#platforms">全端支持</a><a href="#plugins">插件生态</a>
-      </div>
-      <div class="footer-links">
-        <h4>服务</h4><a href="https://www.aiwhaler.com/help/" target="_blank" rel="noreferrer">帮助中心</a><a
-          href="https://www.aiwhaler.com/ua/" target="_blank" rel="noreferrer">用户协议</a><a
-          href="https://www.aiwhaler.com/pp/" target="_blank" rel="noreferrer">隐私政策</a>
-      </div>
-      <div class="footer-links">
-        <h4>关注我们</h4><a href="https://www.zhihu.com/people/33-44-73-12-10" target="_blank" rel="noreferrer">知乎</a><a
-          href="https://www.xiaohongshu.com/user/profile/64b5fb93000000000b014f78?xsec_token=YBs9EIHtVuIMv2UWOAIHM7QhzUi7QojCZ7lUKYCObpTHU=&xsec_source=app_share&xhsshare=CopyLink&shareRedId=N0tGMzVLOTw2NzUyOTgwNjY0OTc5R0g7&apptime=1759463311&share_id=caa6c636cc1f49269fd532deb81e2d7a"
-          target="_blank" rel="noreferrer">小红书</a><a
-          href="https://www.douyin.com/user/MS4wLjABAAAABp8XqktGdCTIBd9gexYpg2AvXDGUhnJkmkj9J9zhR7GNMPfJEsQixwJRlf9d10Ah"
-          target="_blank" rel="noreferrer">抖音</a>
-      </div>
-    </div>
-    <p class="copyright">AIToWord · Copyright © 2018 - 2026 AI转换助手版权所有 <a href="https://beian.miit.gov.cn/" target="_blank"
-        rel="noreferrer">湘ICP备2024045717号-7</a></p>
-  </footer>
+    <!-- Pain Points -->
+    <section class="pain-points fade-in">
+        <div class="container">
+            <h2 class="section-title">告别复制粘贴，重塑你的 AI 知识管理</h2>
+            <div class="cards-grid-3" style="margin-top: 64px;">
+                <div class="point-card">
+                    <div class="point-icon">🎨</div>
+                    <h3>完美还原排版</h3>
+                    <p>完整保留代码高亮、LaTeX 公式对齐、复杂表格与标题层级，导出即定稿，告别格式错乱。</p>
+                </div>
+                <div class="point-card">
+                    <div class="point-icon">🧠</div>
+                    <h3>深度思考留存</h3>
+                    <p>不仅导出答案，DeepSeek (R1) 的“深度思考”过程也能一键打包带走，不漏掉任何逻辑推演。</p>
+                </div>
+                <div class="point-card">
+                    <div class="point-icon">📚</div>
+                    <h3>知识闭环管理</h3>
+                    <p>从高亮标注、本地收藏到私密云盘，打造专属于你的 DeepSeek 第二大脑。</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
-  <script>
-    (function () {
-      // 完全保持原始 FAQ 数据，但渲染方式改为优雅的折叠卡片(全部展开保持内容可见)
-      const faqData = {
-        questions: [
-          { id: 592, categoryId: 3, title: "AI转换助手 可以做什么？", answer: "AI转换助手 可以将 DeepSeek、豆包、Kimi、Gemini、千问、ChatGPT、文心等主流 AI 生成的 LaTeX 数学公式、复杂表格、Markdown 文本一键转换为 Word、PDF、Excel 文档，解决复制到 Word 后格式乱码的问题。" },
-          { id: 591, categoryId: 3, title: "AI 生成的公式如何复制到 Word 文档？", answer: "AI工具（例如：DeepSeek、豆包、ChatGPT、Gemini）生成的公式通常是LaTeX格式，直接复制到Word会显示为乱码。使用 AI转换助手 可以快速将 LaTeX 公式转换为 Word 文档，只需粘贴AI生成的内容，点击转换，即可下载排版工整的Word文档。" },
-          { id: 590, categoryId: 3, title: "如何在线将 LaTeX 公式转换为 Word 文档？", answer: "打开 AI转换助手 官网（www.aitoword.chat），将 LaTeX 公式代码粘贴到输入框，点击转换按钮，即可在线完成 LaTeX 公式转 Word 操作。支持各种复杂的 LaTeX 公式，转换后的 Word 文档中公式可直接编辑。" },
-          { id: 595, categoryId: 3, title: "AI转换助手 支持 LaTeX 表格转 Word 文档吗？", answer: "支持。AI转换助手 不仅可以将 LaTeX 公式转 Word，还可以将 LaTeX 表格、Markdown 表格转换为 Word 可编辑表格，保留行列结构、合并单元格等格式，适用于论文写作、科研报告、策划方案编辑等场景。" },
-          { id: 596, categoryId: 3, title: "如何将 AI 生成的 Markdown 内容转为 Word 文档？", answer: "将 AI 生成的 Markdown 文本粘贴到 AI转换助手 输入框，或直接上传.md文件，点击转换按钮即可生成格式规范的 Word 文档。系统会自动识别 Markdown 语法并转换为 Word 原生格式。" },
-          { id: 51, title: "LaTeX 公式乱码", answer: "AI转换助手 支持所有的 LaTeX 数学公式、物理公式和化学方程式。如果您导出的内容中出现了公式错乱，请联系在线客服反馈给我们，我们会在1个工作日内修复问题。", categoryId: 2 },
-          { id: 89, title: "LaTeX 公式出现虚线方框", answer: "对于某些特殊的数学符号，转换后会出现虚线方框，如果您想要去除这些虚线方框，可先用鼠标点击虚线方框，然后使用键盘输入空格即可。", categoryId: 2 },
-          { id: 4, title: "小程序端预览文件时，公式不显示", answer: "微信小程序端预览文件时，可能会出现公式无法正常展示的情况，如果您的文件中包含公式，请使用WPS预览文件，或将文件分享到电脑端进行预览。详情请咨询客服。", categoryId: 2 },
-          { id: 3, title: "转换成 Excel 文件无内容", answer: "AI转换助手 会自动匹配文案中的表格，如果您的文案中不包含表格，或文案格式不标准，则可能会导致生成的文件内容为空。", categoryId: 2 },
-          { id: 5, title: "Html 格式文案转换异常", answer: "AI转换助手 默认支持的文案格式为 Markdown，Html 格式的文案会导致转换异常，由此，建议您与 AI 对话时，不要要求 AI 以 Html 的格式回复内容。", categoryId: 2 },
-          { id: 6, title: "Mermaid 流程图生成失败", answer: "请优先检查您的数据格式，数据格式错误是导致流程图无法正常生成的主要原因。AI转换助手会自动帮您修复常见的格式问题，对于少量不太常见的格式问题，可联系在线客服进行处理。", categoryId: 2 },
-          { id: 4, title: "隐私保护相关", answer: "AI转换助手 承诺保护您的隐私，仅在必要情况下，您在 AI转换助手 中产生的文件和数据会进行加密存储，且您随时可以永久删除这些文件和数据。", categoryId: 3 },
-          { id: 40, title: "DeepSeek网页端用户", answer: "1.与DeepSeek对话并生成文案内容。\n2.点击文案下方DeepSeek自带的复制按钮（注意：不要全选复制或长按复制，这样做可能会导致文案格式异常）\n3.将文案粘贴到AI转换助手，导出为Word或Pdf文档。", categoryId: 1 },
-          { id: 41, title: "DeepSeek、文心手机端用户", answer: "1.与DeepSeek对话并生成文案内容（请在对话中添加这段话——'请使用markdown格式返回内容，并使用markdown标签包裹内容'）\n2.点击markdown文案右上方的复制按钮（注意：不要全选复制或长按复制，这样做可能会导致文案格式异常）\n3.将文案粘贴到AI转换助手，导出为Word或Pdf文档。", categoryId: 1 },
-          { id: 42, title: "豆包网页端用户", answer: "1.与豆包对话并生成文案内容。\n2.点击文案上方豆包自带的下载-Markdown按钮（注意：不要全选复制或长按复制，这样做可能会导致文案格式异常），将后缀为.md的文件下载到电脑中。\n3.打开.md文件，复制文件中的全部内容。\n4.将内容粘贴到AI转换助手，导出为Word或Pdf文档。", categoryId: 1 },
-          { id: 43, title: "豆包手机端用户", answer: "1.与豆包对话并生成文案内容。\n2.点击文案下方的分享按钮，选择导出文件-TXT文件，点击导出按钮。\n3.豆包会自动打开.txt文件，请选择并复制文件中的内容。\n4.将内容粘贴到AI转换助手，导出为Word或Pdf文档。", categoryId: 1 },
-          { id: 48, categoryId: 1, title: "Gemini、GPT、Grok手机端用户", answer: "1.与Gemini、GPT、Grok对话并生成文案内容（请在对话中添加这段话——“请使用markdown格式返回内容，并使用markdown标签包裹内容”）\n2.文案生成好后，点击markdown文案右上方的复制按钮（注意：不要全选复制或长按复制，这样做可能会导致文案格式异常）\n3.将文案粘贴到AI转换助手，点击导出为Word或Pdf文档按钮。" }
-        ],
-        categories: [{ id: 1, title: "操作指南" }, { id: 2, title: "文件转换问题" }, { id: 3, title: "功能介绍" }, { id: 4, title: "AI转换助手福利" }]
-      };
-      const container = document.getElementById('faq-accordion');
-      if (container) {
-        const catMap = new Map();
-        faqData.categories.forEach(c => catMap.set(c.id, { title: c.title, items: [] }));
-        faqData.questions.forEach(q => {
-          const cat = catMap.get(q.categoryId);
-          if (cat) cat.items.push(q);
+    <!-- Core Features -->
+    <section id="features" class="fade-in">
+        <div class="container">
+            <h2 class="section-title">强大的核心功能</h2>
+            <p class="section-subtitle">为深度使用 DeepSeek 的你量身打造</p>
+
+            <!-- Feature 1 -->
+            <div class="feature-item">
+                <div class="feature-text">
+                    <h3>全能格式导出</h3>
+                    <p>一键将 DeepSeek 对话转化为 Word (.docx)、PDF、Markdown、HTML、ipynb、JSON、PNG 格式。无论你是写报告、做笔记还是做数据分析，总有一款格式适合你。</p>
+                </div>
+                <div class="image-placeholder feature-img">
+                    [图片占位] 点击导出按钮后，弹出7种格式选择的精美菜单界面
+                </div>
+            </div>
+
+            <!-- Feature 2 -->
+            <div class="feature-item reverse">
+                <div class="feature-text">
+                    <h3>深度定制偏好设置</h3>
+                    <p>你的文档你做主。自定义文档样式，调整 LaTeX 公式对齐（居中/居左），一键删除多余的分隔线与 Emoji 表情，甚至开启自动修复 Markdown 格式错误，让导出文档更专业。</p>
+                </div>
+                <div class="image-placeholder feature-img">
+                    [图片占位] 展示偏好设置面板，包含各种开关和下拉菜单
+                </div>
+            </div>
+
+            <!-- Feature 3 -->
+            <div class="feature-item">
+                <div class="feature-text">
+                    <h3>深度思考一键导出</h3>
+                    <p>DeepSeek 的思考过程充满了启发性。开启该功能，你可以将“深度思考”模式下的推理过程与最终回答一并导出，绝佳的复盘与学习资料。</p>
+                </div>
+                <div class="image-placeholder feature-img">
+                    [图片占位] 导出的 PDF 中，带有特殊样式的“思考过程”区块
+                </div>
+            </div>
+
+            <!-- Feature 4 -->
+            <div class="feature-item reverse">
+                <div class="feature-text">
+                    <h3>高效批量导出</h3>
+                    <p>面对大量优质对话，无需逐一操作。支持多选对话进行批量导出，极大提升整理效率，专为重度 AI 使用者设计。</p>
+                </div>
+                <div class="image-placeholder feature-img">
+                    [图片占位] 在对话列表中勾选多个对话并点击“批量导出”的动画/GIF
+                </div>
+            </div>
+
+            <!-- Feature 5 -->
+            <div class="feature-item">
+                <div class="feature-text">
+                    <h3>高亮标注与内化</h3>
+                    <p>像阅读电子书一样阅读 AI 的回答。拖选 DeepSeek 中的文字即可高亮，支持“普通、关注、重点、错误”4 个等级标记，帮你快速提取关键信息，构建阅读笔记。</p>
+                </div>
+                <div class="image-placeholder feature-img">
+                    [图片占位] 用户正在用不同颜色（4个等级）划线高亮 DeepSeek 回答的界面
+                </div>
+            </div>
+
+            <!-- Feature 6 -->
+            <div class="feature-item reverse">
+                <div class="feature-text">
+                    <h3>智能收藏夹</h3>
+                    <p>遇到好回答，一键加入收藏夹随时查阅。收藏夹内的内容支持批量导出为 Word 文档，让你的灵感库永不丢失。</p>
+                </div>
+                <div class="image-placeholder feature-img">
+                    [图片占位] 插件的收藏夹弹窗，里面有几条带标题和摘要的收藏记录
+                </div>
+            </div>
+
+            <!-- Feature 7 -->
+            <div class="feature-item">
+                <div class="feature-text">
+                    <h3>私密云盘与长期记忆</h3>
+                    <p>每个用户配备大容量私密云盘。将导出的文档存入云盘，不仅方便跨设备下载，更可一键上传作为 DeepSeek 的专属知识库，打破上下文限制，赋予 DeepSeek 长期记忆能力。</p>
+                </div>
+                <div class="image-placeholder feature-img">
+                    [图片占位] 云盘界面，以及一个箭头指向 DeepSeek 对话框的“知识库上传”流程图
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Scenarios -->
+    <section id="scenarios" class="scenarios fade-in">
+        <div class="container">
+            <h2 class="section-title">为每一种创作场景赋能</h2>
+            <div class="cards-grid-3" style="margin-top: 64px;">
+                <div class="scenario-card">
+                    <h3>🎓 学术与学习整理</h3>
+                    <p>导出复杂的 LaTeX 公式和推导过程为 PDF/Word，打造个人学霸笔记，方便复习与论文撰写。</p>
+                </div>
+                <div class="scenario-card">
+                    <h3>💻 技术文档沉淀</h3>
+                    <p>保留完美的代码高亮与层级结构，导出 Markdown 或 HTML，直接接入团队 Wiki 或个人博客。</p>
+                </div>
+                <div class="scenario-card">
+                    <h3>📊 数据分析与协作</h3>
+                    <p>将 DeepSeek 生成的 Python 代码与逻辑导出为 ipynb，直接在 Jupyter 中运行验证，无缝衔接工作流。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Privacy Highlight -->
+    <section class="fade-in">
+        <div class="container">
+            <div class="privacy-section">
+                <div class="browser-icon" style="background: rgba(255,255,255,0.2); color: white; width: 80px; height: 80px; font-size: 2.5rem; margin: 0 auto 30px;">🛡️</div>
+                <h2>无痕模式：100% 隐私保护</h2>
+                <p>你的数据，只属于你。开启无痕模式后，所有数据与操作均在本地进行高强度加密处理，云端零存储，从技术底层 100% 保护你的隐私与商业机密。</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Bottom CTA -->
+    <section class="cta-section fade-in">
+        <div class="container">
+            <h2 class="section-title">开始构建你的 DeepSeek 专属知识库</h2>
+            <p class="section-subtitle" style="margin-bottom: 40px;">免费下载 DeepSeek Exporter，让 AI 的每一次回答都发挥最大价值。</p>
+            <div class="hero-buttons">
+                <a href="https://www.aiwhaler.com/" target="_blank" class="btn btn-primary">🚀 在线使用</a>
+                <a href="#install" class="btn btn-outline">⬇ 安装插件</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-col">
+                    <h4>产品</h4>
+                    <a href="#features">功能介绍</a>
+                    <a href="#">更新日志</a>
+                    <a href="#">使用教程</a>
+                </div>
+                <div class="footer-col">
+                    <h4>支持</h4>
+                    <a href="#">常见问题 (FAQ)</a>
+                    <a href="#">用户反馈</a>
+                    <a href="#">联系我们</a>
+                </div>
+                <div class="footer-col">
+                    <h4>法律</h4>
+                    <a href="#">隐私政策</a>
+                    <a href="#">服务条款</a>
+                </div>
+                <div class="footer-col">
+                    <h4>关注我们</h4>
+                    <a href="#">微信公众号</a>
+                    <a href="https://www.aiwhaler.com/" target="_blank">在线使用平台</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                © 2024 DeepSeek Exporter. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Navbar scroll effect
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 30) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
         });
-        let html = '<div class="faq-columns">';
-        for (let [id, cat] of catMap.entries()) {
-          if (cat.items.length === 0) continue;
-          html += `<div class="faq-cat-card"><div class="faq-cat-title">${escapeHtml(cat.title)}</div><div class="faq-list">`;
-          cat.items.forEach(item => {
-            let answerHtml = escapeHtml(item.answer).replace(/\n/g, '<br>');
-            html += `<div class="faq-q-item"><div class="faq-q">${escapeHtml(item.title)}</div><div class="faq-a">${answerHtml}</div></div>`;
-          });
-          html += `</div></div>`;
-        }
-        html += '</div>';
-        container.innerHTML = html;
-      }
-      function escapeHtml(str) { if (!str) return ''; return str.replace(/[&<>]/g, function (m) { if (m === '&') return '&amp;'; if (m === '<') return '&lt;'; if (m === '>') return '&gt;'; return m; }); }
-    })();
-  </script>
-</body>
 
+        // Mobile menu toggle
+        function toggleMenu() {
+            const navLinks = document.getElementById('navLinks');
+            navLinks.classList.toggle('active');
+        }
+
+        // Smooth scroll & Close mobile menu on link click
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                const targetId = this.getAttribute('href');
+                if(targetId === '#') return;
+                
+                const target = document.querySelector(targetId);
+                if (target) {
+                    e.preventDefault();
+                    target.scrollIntoView({ behavior: 'smooth' });
+                    document.getElementById('navLinks').classList.remove('active');
+                }
+            });
+        });
+
+        // Scroll fade-in animation with Intersection Observer
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.fade-in').forEach(el => {
+            observer.observe(el);
+        });
+    </script>
+</body>
 </html>
