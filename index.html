@@ -4,42 +4,31 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>DeepSeek Exporter - 轻松沉淀 DeepSeek 智慧，一键导出多种格式文档</title>
-  <meta property="og:title" content="DeepSeek Exporter - AI转Word">
-  <meta property="og:description"
-    content="DeepSeek Exporter 是专为 DeepSeek 打造的效率插件。完美还原代码高亮、LaTeX 公式与表格层级。支持 Word、PDF、Markdown 等 7 种格式导出，让你的 AI 对话秒变专业文档。">
-  <meta property="og:site_name" content="DeepSeek Exporter">
-  <meta property="og:url" content="https://www.aibusgo.com/">
-  <meta property="og:type" content="website">
-  <meta property="og:locale" content="zh_CN">
-  <meta name="description"
-    content="DeepSeek Exporter 是专为 DeepSeek 打造的效率插件。完美还原代码高亮、LaTeX 公式与表格层级。支持 Word、PDF、Markdown 等 7 种格式导出，让你的 AI 对话秒变专业文档。" />
-  <meta name="keywords"
-    content="DeepSeek Exporter,DeepSeek-Exporter,AI公式转Word,LaTeX公式转Word,Markdown转Word,DeepSeek转Word,AI对话转Word,DeepSeek2Word,DeepShare,Chat2File">
-  <link rel="canonical" href="https://www.aibusgo.com/">
+
+  <title>AI考公Prompt生成助手 - 申论批改与行测技巧模板工具</title>
+  <meta name="description" content="在线AI Prompt生成工具，一键生成申论批改、行测错题分析、时政热点解读等高阶Prompt模版。支持DeepSeek与ChatGPT，辅助公务员备考精准提分。">
+  <meta name="keywords" content="AI Prompt,考公Prompt,申论批改,行测技巧,公务员考试,DeepSeek,豆包,公考助手">
+  <meta name="author" content="AI Prompt Assistant">
+  <meta name="robots" content="index, follow">
+
   <link rel="icon" href="images/logo.png" />
   <link rel="apple-touch-icon" href="images/logo.png" />
-  <link rel="stylesheet" href="styles.css" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link
-    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap"
-    rel="stylesheet" />
+
+  <!-- Open Graph 协议 (社交分享优化) -->
+  <meta property="og:title" content="AI考公Prompt生成助手">
+  <meta property="og:description" content="一键生成专业申论批改与行测分析Prompt，提升公考备考效率。">
+  <meta property="og:type" content="website">
+
   <style>
     :root {
-      --primary-color: #4D6BFE;
-      --primary-hover: #3a55e0;
-      --secondary-color: #8B5CF6;
-      /* 紫色辅助色 */
-      --text-main: #1F2937;
-      --text-secondary: #6B7280;
-      --bg-white: #FFFFFF;
-      --bg-light: #F8F9FA;
-      --border-color: #E5E7EB;
-      --card-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
-      --card-shadow-hover: 0 12px 40px rgba(77, 107, 254, 0.2);
-      --gradient-primary: linear-gradient(135deg, #4D6BFE 0%, #8B5CF6 100%);
-      --gradient-bg: linear-gradient(180deg, #F0F6FF 0%, #FFFFFF 100%);
+      --primary: #4D6BFE;
+      --primary-light: #eef2ff;
+      --text-main: #1f2937;
+      --text-sub: #6b7280;
+      --bg-color: #f9fafb;
+      --card-bg: #ffffff;
+      --border: #e5e7eb;
+      --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
     }
 
     * {
@@ -49,1282 +38,944 @@
     }
 
     body {
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "PingFang SC", "Microsoft YaHei", sans-serif;
+      font-family: 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      background: var(--bg-color);
       color: var(--text-main);
-      background-color: var(--bg-white);
-      line-height: 1.6;
-      overflow-x: hidden;
-    }
-
-    a {
-      text-decoration: none;
-      color: inherit;
-    }
-
-    /* FAQ Section */
-    .faq-section {
-      background-color: var(--bg-light);
-    }
-
-    .faq-list {
-      max-width: 820px;
-      margin: 0 auto;
-    }
-
-    .faq-item {
-      background: white;
-      border-radius: 14px;
-      margin-bottom: 16px;
-      box-shadow: var(--card-shadow);
-      overflow: hidden;
-      border: 1px solid transparent;
-      transition: all 0.3s ease;
-    }
-
-    .faq-item:hover {
-      border-color: rgba(77, 107, 254, 0.2);
-    }
-
-    .faq-item.active {
-      border-color: var(--primary-color);
-      box-shadow: var(--card-shadow-hover);
-    }
-
-    .faq-question {
-      padding: 22px 28px;
-      cursor: pointer;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      font-weight: 600;
-      font-size: 1.05rem;
-      color: var(--text-main);
-    }
-
-    .faq-question span:first-child {
-      padding-right: 20px;
-    }
-
-    .faq-icon {
-      flex-shrink: 0;
-      width: 24px;
-      height: 24px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.5rem;
-      color: var(--primary-color);
-      transition: transform 0.3s ease;
-    }
-
-    .faq-item.active .faq-icon {
-      transform: rotate(45deg);
-      /* "+" 变成 "x" */
-    }
-
-    .faq-answer {
-      max-height: 0;
-      overflow: hidden;
-      transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1), padding 0.4s ease;
-      padding: 0 28px;
-      color: var(--text-secondary);
-      font-size: 0.98rem;
-      line-height: 1.7;
-    }
-
-    .faq-item.active .faq-answer {
-      max-height: 600px;
-      /* 确保足以容纳最长回答 */
-      padding-bottom: 24px;
-    }
-
-    .faq-answer p {
-      margin: 0;
-    }
-
-
-    .container {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 24px;
-      position: relative;
-      z-index: 2;
-    }
-
-    /* Navbar */
-    .navbar {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      z-index: 1000;
-      transition: all 0.3s ease;
-      padding: 20px 0;
-      background: rgba(255, 255, 255, 0.7);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      border-bottom: 1px solid transparent;
-    }
-
-    .navbar.scrolled {
-      border-bottom: 1px solid rgba(255, 255, 255, 0.8);
-      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.04);
-      padding: 12px 0;
-    }
-
-    .nav-content {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    .logo {
-      font-size: 1.5rem;
-      font-weight: 700;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      background: #000000;
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-
-    .nav-links {
-      display: flex;
-      align-items: center;
-      gap: 32px;
-    }
-
-    .nav-links a {
-      font-size: 0.95rem;
-      color: var(--text-secondary);
-      transition: color 0.2s;
-      position: relative;
-    }
-
-    .nav-links a:not(.btn):hover {
-      color: var(--primary-color);
-    }
-
-    .nav-links a:not(.btn)::after {
-      content: '';
-      position: absolute;
-      bottom: -4px;
-      left: 0;
-      width: 0;
-      height: 2px;
-      background: var(--gradient-primary);
-      transition: width 0.3s ease;
-    }
-
-    .nav-links a:not(.btn):hover::after {
-      width: 100%;
-    }
-
-    /* Buttons with Glow & Shine Effect */
-    .btn {
-      padding: 12px 28px;
-      border-radius: 10px;
-      font-size: 0.95rem;
-      font-weight: 600;
-      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-      cursor: pointer;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      position: relative;
+      height: 100vh;
       overflow: hidden;
     }
 
-    .btn-primary {
-      background: var(--gradient-primary);
-      color: white;
-      border: none;
-    }
-
-    .btn-primary:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 8px 25px rgba(77, 107, 254, 0.5);
-    }
-
-    /* Shine sweep effect */
-    .btn-primary::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: -100%;
-      width: 100%;
+    /* === 布局结构 === */
+    .app-layout {
+      display: flex;
       height: 100%;
-      background: linear-gradient(120deg, transparent, rgba(255, 255, 255, 0.3), transparent);
-      transition: all 0.6s;
     }
 
-    .btn-primary:hover::before {
-      left: 100%;
+    .preview-highlight {
+      background-color: rgba(255, 213, 79, 0.3) !important;
+      outline: 2px solid #ffc107;
+      border-radius: 4px;
+      transition: all 0.2s ease;
     }
 
-    .btn-outline {
-      background-color: rgba(255, 255, 255, 0.6);
-      color: var(--primary-color);
-      border: 1px solid rgba(77, 107, 254, 0.3);
-    }
-
-    .btn-outline:hover {
-      background-color: white;
-      border-color: var(--primary-color);
-      transform: translateY(-2px);
-      box-shadow: 0 4px 15px rgba(77, 107, 254, 0.1);
-    }
-
-    .menu-toggle {
-      display: none;
+    /* 左侧菜单栏 */
+    .sidebar {
+      width: 300px;
+      background: #fff;
+      border-right: 1px solid var(--border);
+      display: flex;
       flex-direction: column;
-      gap: 5px;
+      flex-shrink: 0;
+    }
+
+    .brand {
+      padding: 20px 20px;
+      font-size: 19px;
+      font-weight: 700;
+      color: #000000;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .menu-scroll {
+      flex: 1;
+      overflow-y: auto;
+      padding: 10px;
+    }
+
+    .chapter-title {
+      font-size: 12px;
+      color: #2c2c2c;
+      padding: 10px 5px 5px;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+    }
+
+    .menu-item {
+      padding: 12px 15px;
       cursor: pointer;
-      z-index: 1001;
-    }
-
-    .menu-toggle span {
-      width: 24px;
-      height: 2px;
-      background: var(--text-main);
-      transition: 0.3s;
-    }
-
-    /* Hero Section with Tech Background */
-    .hero {
-      padding: 180px 0 80px;
-      text-align: center;
-      background: var(--gradient-bg);
-      position: relative;
-      overflow: hidden;
-    }
-
-    /* Grid Pattern */
-    .hero::before {
-      content: "";
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background-image: linear-gradient(rgba(77, 107, 254, 0.05) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(77, 107, 254, 0.05) 1px, transparent 1px);
-      background-size: 40px 40px;
-      mask-image: radial-gradient(ellipse 80% 80% at 50% 0%, #000 70%, transparent 100%);
-      -webkit-mask-image: radial-gradient(ellipse 80% 80% at 50% 0%, #000 70%, transparent 100%);
-      z-index: 1;
-    }
-
-    /* Floating Blobs */
-    .blob {
-      position: absolute;
-      border-radius: 50%;
-      filter: blur(80px);
-      z-index: 0;
-      animation: float 10s infinite ease-in-out;
-    }
-
-    .blob-1 {
-      width: 500px;
-      height: 500px;
-      background: rgba(77, 107, 254, 0.15);
-      top: -100px;
-      left: -100px;
-    }
-
-    .blob-2 {
-      width: 400px;
-      height: 400px;
-      background: rgba(139, 92, 246, 0.15);
-      bottom: -50px;
-      right: -50px;
-      animation-delay: -5s;
-    }
-
-    @keyframes float {
-
-      0%,
-      100% {
-        transform: translate(0, 0) scale(1);
-      }
-
-      50% {
-        transform: translate(30px, 30px) scale(1.1);
-      }
-    }
-
-    .hero h1 {
-      font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-      font-size: 3.4rem;
-      font-weight: 800;
-      margin-bottom: 24px;
-      line-height: 1.2;
-      letter-spacing: -1px;
-    }
-
-    .feature-des-img {
-      width: 600px;
-      height: 400px;
-      border-radius: 10px;
-    }
-
-    .hero h1 span {
-      background: var(--gradient-primary);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      display: inline-block;
-    }
-
-    .hero p {
-      font-size: 1.2rem;
-      color: var(--text-secondary);
-      max-width: 960px;
-      margin: 0 auto 40px;
-    }
-
-    .hero-buttons {
-      display: flex;
-      justify-content: center;
-      gap: 16px;
-      margin-bottom: 20px;
-    }
-
-    .hero-cta-link {
-      color: var(--text-secondary);
-      font-size: 0.95rem;
-      display: inline-block;
-      margin-top: 16px;
-      transition: color 0.2s;
-    }
-
-    .hero-cta-link:hover {
-      color: var(--primary-color);
-    }
-
-    /* Image Placeholder with Glow Border */
-    .image-placeholder {
-      background-color: rgba(255, 255, 255, 0.5);
-      border-radius: 16px;
+      border-radius: 8px;
+      margin-bottom: 4px;
+      transition: all 0.2s;
+      font-size: 14px;
       display: flex;
       align-items: center;
-      justify-content: center;
-      color: #64748B;
-      font-size: 0.9rem;
-      margin-top: 60px;
-      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.1);
-      width: 688px;
-      margin-left: auto;
-      margin-right: auto;
-      position: relative;
-      overflow: hidden;
+      gap: 8px;
     }
 
-    /* Animated glowing border */
-    .image-placeholder::after {
-      content: '';
-      position: absolute;
-      top: -2px;
-      left: -2px;
-      right: -2px;
-      bottom: -2px;
-      background: var(--gradient-primary);
-      z-index: -1;
-      border-radius: 18px;
-      opacity: 0;
-      filter: blur(10px);
-      transition: opacity 0.3s;
+    .menu-item:hover {
+      background: #f3f4f6;
     }
 
-    .image-placeholder:hover::after {
-      opacity: 0.6;
+    .menu-item.active {
+      background: var(--primary-light);
+      color: var(--primary);
+      font-weight: 600;
     }
 
-    /* Generic Section Styles */
-    section {
-      padding: 100px 0;
-      position: relative;
+    .menu-tag {
+      font-size: 10px;
+      padding: 2px 6px;
+      border-radius: 4px;
+      background: #e5e7eb;
+      color: #555;
+      flex-shrink: 0;
     }
 
-    .section-title {
-      text-align: center;
-      font-size: 2.5rem;
-      font-weight: 800;
-      margin-bottom: 16px;
-      letter-spacing: -0.5px;
-    }
-
-    .section-subtitle {
-      text-align: center;
-      font-size: 1.1rem;
-      color: var(--text-secondary);
-      max-width: 640px;
-      margin: 0 auto 64px;
-    }
-
-    /* Install Section */
-    .install-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 24px;
-    }
-
-    .browser-card {
-      background: rgba(255, 255, 255, 0.8);
-      border: 1px solid var(--border-color);
-      border-radius: 16px;
-      padding: 32px 24px;
-      text-align: center;
-      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-      position: relative;
-      overflow: hidden;
-    }
-
-    /* Background shine on hover */
-    .browser-card::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 4px;
-      background: var(--gradient-primary);
-      transform: scaleX(0);
-      transform-origin: left;
-      transition: transform 0.4s;
-    }
-
-    .browser-card:hover {
-      border-color: transparent;
-      box-shadow: var(--card-shadow-hover);
-      transform: translateY(-8px);
-      background: white;
-    }
-
-    .browser-card:hover::before {
-      transform: scaleX(1);
-    }
-
-    .browser-icon {
-      width: 64px;
-      height: 64px;
-      background: var(--bg-light);
-      border-radius: 50%;
-      margin: 0 auto 20px;
+    .tutorial-btn {
       display: flex;
+      /* 或 inline-block，视布局而定 */
+      padding: 12px 0px 12px 16px;
+      background-color: #f0f2f5;
+      /* 根据实际主题色调整 */
+      color: #333;
+      text-decoration: none;
+      font-size: 15px;
       align-items: center;
-      justify-content: center;
-      font-size: 1.8rem;
-      transition: transform 0.3s;
+      font-weight: bold;
+      cursor: pointer;
+      transition: all 0.2s ease;
     }
 
-    .browser-card:hover .browser-icon {
-      transform: scale(1.1) rotate(5deg);
-      background: rgba(77, 107, 254, 0.1);
+    .tutorial-btn:hover {
+      background-color: #e0e4ea;
     }
 
-    .browser-card h3 {
-      font-size: 1.1rem;
+    .menu-tag.core {
+      background: #dcfce7;
+      color: #166534;
+    }
+
+    .menu-tag.advanced {
+      background: #fef3c7;
+      color: #92400e;
+    }
+
+    /* 主内容区域 */
+    .main-wrapper {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      background: #F9FAFB;
+      min-width: 0;
+      /* 关键：防止flex子项溢出 */
+    }
+
+    /* 主内容双栏布局 */
+    .content-split {
+      flex: 1;
+      display: flex;
+      gap: 20px;
+      padding: 20px;
+      overflow: hidden;
+      min-width: 0;
+      /* 关键：防止溢出 */
+    }
+
+    /* 左栏：表单 */
+    .form-panel {
+      flex: 1;
+      background: #fff;
+      border-radius: 12px;
+      padding: 30px;
+      overflow-y: auto;
+      min-width: 0;
+      /* 关键：限制最小宽度 */
+    }
+
+    .page-header {
+      margin-bottom: 25px;
+    }
+
+    .page-title {
+      font-size: 22px;
+      font-weight: 700;
       margin-bottom: 8px;
     }
 
-    .browser-card p {
-      font-size: 0.85rem;
-      color: var(--text-secondary);
-      margin-bottom: 24px;
-      min-height: 48px;
-    }
-
-    /* Pain Points */
-    .pain-points {
-      background-color: var(--bg-light);
-    }
-
-    .cards-grid-3 {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 32px;
-    }
-
-    .point-card {
-      background: white;
-      padding: 36px;
-      border-radius: 16px;
-      border: 1px solid transparent;
-      box-shadow: var(--card-shadow);
-      transition: all 0.3s;
-    }
-
-    .point-card:hover {
-      border-color: rgba(77, 107, 254, 0.3);
-      transform: translateY(-5px);
-    }
-
-    .point-icon {
-      font-size: 2.5rem;
-      margin-bottom: 20px;
+    .meta-badge {
       display: inline-block;
+      padding: 4px 10px;
+      background: var(--primary-light);
+      color: var(--primary);
+      border-radius: 6px;
+      font-size: 12px;
+      font-weight: 600;
+      margin-right: 10px;
     }
 
-    .point-card h3 {
-      font-size: 1.3rem;
-      margin-bottom: 12px;
+    .meta-text {
+      color: var(--text-sub);
+      font-size: 13px;
     }
 
-    .point-card p {
-      color: var(--text-secondary);
-      font-size: 0.95rem;
+    .scene-tip {
+      background: #fffbeb;
+      color: #b45309;
+      padding: 12px;
+      border-radius: 6px;
+      margin-top: 15px;
+      font-size: 13px;
+      line-height: 1.5;
     }
 
-    /* Features Section */
-    .feature-item {
+    /* 表单组件 */
+    .input-group {
+      margin-bottom: 20px;
+    }
+
+    .input-label {
+      display: block;
+      font-size: 14px;
+      font-weight: 600;
+      margin-bottom: 8px;
+      color: var(--text-main);
+    }
+
+    .form-control {
+      width: 100%;
+      padding: 10px 12px;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      font-size: 14px;
+      transition: border 0.3s;
+      background: #fff;
+    }
+
+    .form-control:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+    }
+
+    textarea.form-control {
+      resize: vertical;
+      min-height: 100px;
+      font-family: inherit;
+      line-height: 1.5;
+    }
+
+    /* 追加项 */
+    .addon-box {
+      background: #f0fdf4;
+      border: 1px solid #bbf7d0;
+      padding: 15px;
+      border-radius: 8px;
+      margin-bottom: 20px;
+    }
+
+    .addon-box h4 {
+      font-size: 14px;
+      color: #166534;
+      margin-bottom: 10px;
       display: flex;
       align-items: center;
-      gap: 80px;
-      margin-bottom: 120px;
+      gap: 5px;
     }
 
-    .feature-item:last-child {
-      margin-bottom: 0;
+    .addon-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 14px;
+      color: #15803d;
     }
 
-    .feature-item.reverse {
-      flex-direction: row-reverse;
+    .addon-item input {
+      cursor: pointer;
     }
 
-    .feature-text h3 {
-      font-size: 2rem;
-      margin-bottom: 24px;
-      background: #000000;
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      display: inline-block;
-    }
-
-    .feature-text p {
-      color: var(--text-secondary);
-      font-size: 1.05rem;
-      line-height: 1.8;
-    }
-
-    .feature-img {
-      flex: 1;
-      min-height: 360px;
-    }
-
-    /* Scenarios */
-    .scenarios {
-      background-color: var(--bg-light);
-    }
-
-    .scenario-card {
-      background: white;
-      padding: 36px;
-      border-radius: 16px;
-      box-shadow: var(--card-shadow);
-      transition: all 0.3s;
-      border-top: 4px solid transparent;
-    }
-
-    .scenario-card:hover {
-      transform: translateY(-5px);
-      border-top-color: var(--primary-color);
-      box-shadow: var(--card-shadow-hover);
-    }
-
-    .scenario-card h3 {
-      font-size: 1.3rem;
-      margin-bottom: 12px;
-    }
-
-    .scenario-card p {
-      color: var(--text-secondary);
-      font-size: 0.95rem;
-    }
-
-    /* Privacy Section with High Tech Vibe */
-    .privacy-section {
-      background: radial-gradient(circle at top left, #4D6BFE, #2A3990 80%);
-      color: white;
-      border-radius: 24px;
-      padding: 80px 40px;
-      text-align: center;
-      position: relative;
+    /* 右栏：预览 - 核心修改区 */
+    .preview-panel {
+      width: 45%;
+      min-width: 400px;
+      /* 最小宽度 */
+      background: #fff;
+      border-radius: 12px;
+      display: flex;
+      flex-direction: column;
       overflow: hidden;
-      box-shadow: 0 20px 50px rgba(42, 57, 144, 0.3);
+      min-width: 0;
     }
 
-    /* Glowing dots decoration */
-    .privacy-section::before,
-    .privacy-section::after {
-      content: '';
-      position: absolute;
-      border-radius: 50%;
-      background: rgba(255, 255, 255, 0.1);
-    }
-
-    .privacy-section::before {
-      width: 300px;
-      height: 300px;
-      top: -150px;
-      right: -50px;
-    }
-
-    .privacy-section::after {
-      width: 200px;
-      height: 200px;
-      bottom: -100px;
-      left: -50px;
-    }
-
-    .privacy-section h2 {
-      font-size: 2.8rem;
-      margin-bottom: 24px;
-      position: relative;
-      z-index: 2;
-    }
-
-    .privacy-section p {
-      font-size: 1.1rem;
-      max-width: 700px;
-      margin: 0 auto;
-      opacity: 0.9;
-      position: relative;
-      z-index: 2;
-    }
-
-    /* Bottom CTA */
-    .cta-section {
-      text-align: center;
-    }
-
-    /* Footer */
-    footer {
-      background-color: #111827;
-      color: #9CA3AF;
-      padding: 60px 0 30px;
-    }
-
-    .footer-content {
+    .preview-header {
+      padding: 20px;
+      border-bottom: 1px solid var(--border);
       display: flex;
       justify-content: space-between;
-      flex-wrap: wrap;
-      gap: 40px;
-      margin-bottom: 40px;
+      align-items: center;
+      flex-shrink: 0;
     }
 
-    .footer-col h4 {
-      color: white;
-      margin-bottom: 16px;
-      font-size: 1rem;
+    .preview-title {
+      font-size: 16px;
+      font-weight: 600;
+      color: #2c2c2c;
     }
 
-    .footer-col a {
-      display: block;
-      margin-bottom: 10px;
-      font-size: 0.9rem;
-      color: #9CA3AF;
-      transition: color 0.2s;
+    .btn-copy {
+      background: var(--primary);
+      color: #fff;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 6px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s;
+      display: flex;
+      align-items: center;
+      gap: 8px;
     }
 
-    .footer-col a:hover {
-      color: var(--primary-color);
+    .btn-copy:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(79, 70, 229, 0.3);
     }
 
-    .footer-bottom {
-      border-top: 1px solid #374151;
-      padding-top: 30px;
-      text-align: center;
-      font-size: 0.85rem;
+    /* 预览内容区 */
+    .preview-body {
+      flex: 1;
+      padding: 20px;
+      background: #1e1e1e;
+      color: #d4d4d4;
+      overflow-y: auto;
+      overflow-x: hidden;
+      /* 隐藏横向滚动条 */
+      font-family: 'Consolas', 'Monaco', monospace;
+      font-size: 13px;
+      white-space: pre-wrap;
+      /* 保留空格和换行 */
+      word-break: break-word;
+      /* 强制长单词换行 */
+      line-height: 1.6;
     }
 
-    /* Responsive */
-    @media (max-width: 968px) {
-      .nav-links {
-        display: none;
-        position: absolute;
-        top: 70px;
-        left: 0;
-        width: 100%;
-        background: white;
-        flex-direction: column;
-        padding: 20px;
-        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-      }
-
-      .nav-links.active {
-        display: flex;
-      }
-
-      .menu-toggle {
-        display: flex;
-      }
-
-      .hero h1 {
-        font-size: 2.5rem;
-      }
-
-      .install-grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
-
-      .cards-grid-3 {
-        grid-template-columns: 1fr;
-      }
-
-      .feature-item,
-      .feature-item.reverse {
-        flex-direction: column;
-        gap: 40px;
-      }
-
-      .feature-text {
-        text-align: center;
-      }
-
-      .feature-img {
-        width: 100%;
-      }
+    /* Toast 组件 */
+    .toast-container {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      z-index: 9999;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
     }
 
-    @media (max-width: 600px) {
-      .install-grid {
-        grid-template-columns: 1fr;
+    .toast-msg {
+      background: #323232;
+      color: #fff;
+      padding: 12px 24px;
+      border-radius: 6px;
+      box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2);
+      animation: fadeInOut 3s ease-out forwards;
+    }
+
+    .toast-msg.success {
+      background: #16a34a;
+    }
+
+    @keyframes fadeInOut {
+      0% {
+        opacity: 0;
+        transform: translateY(-20px);
       }
 
-      .hero-buttons {
-        flex-direction: column;
-        gap: 12px;
+      10% {
+        opacity: 1;
+        transform: translateY(0);
       }
 
-      .btn {
-        width: 100%;
+      90% {
+        opacity: 1;
       }
 
-      .section-title {
-        font-size: 2rem;
-      }
-
-      .privacy-section {
-        padding: 50px 20px;
-      }
-
-      .privacy-section h2 {
-        font-size: 2rem;
+      100% {
+        opacity: 0;
       }
     }
 
-    /* Scroll Animation */
-    .fade-in {
-      opacity: 0;
-      transform: translateY(40px);
-      transition: opacity 0.8s ease-out, transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-
-    .fade-in.visible {
-      opacity: 1;
-      transform: translateY(0);
+    /* 空状态 (这段其实会在初始化时被覆盖) */
+    .empty-state {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-sub);
+      font-size: 16px;
+      flex-direction: column;
+      gap: 15px;
     }
   </style>
 </head>
 
 <body>
 
-  <!-- Navbar -->
-  <nav class="navbar" id="navbar">
-    <div class="container nav-content">
-      <a href="#" class="logo">
-        <img src="images/logo.png" style="width: 40px; height: 40px;"> DeepSeek Exporter
+  <!-- Toast 容器 -->
+  <div id="toast-container" class="toast-container"></div>
+
+  <!-- 主布局 -->
+  <div class="app-layout">
+    <!-- 侧边栏 -->
+    <nav class="sidebar">
+      <div class="brand">
+        <img src="images/logo.png" style="width: 32px; height: 32px;">
+        Prompt 生成助手
+      </div>
+      <a href="https://www.deepseek.com/" target="_blank" rel="noopener noreferrer" class="tutorial-btn">
+        <img src="images/icon-1.png" style="width: 20px; height: 20px; margin-right: 4px;"> 获取《AI+考公提分技巧》教程
       </a>
-      <div class="nav-links" id="navLinks">
-        <a href="#install">安装插件</a>
-        <a href="#features">功能特性</a>
-        <a href="#scenarios">应用场景</a>
-        <a href="https://www.aiwhaler.com/" target="_blank" class="btn btn-primary" style="color: #fff;">在线使用</a>
-      </div>
-      <div class="menu-toggle" onclick="toggleMenu()">
-        <span></span><span></span><span></span>
-      </div>
-    </div>
-  </nav>
+      <div class="menu-scroll" id="menu-box"></div>
+    </nav>
 
-  <!-- Hero Section -->
-  <header class="hero">
-    <div class="blob blob-1"></div>
-    <div class="blob blob-2"></div>
-    <div class="container">
-      <h1>专业 DeepSeek 插件<br><span>一键导出多种格式文档</span></h1>
-      <p>DeepSeek Exporter 是专为 DeepSeek 打造的效率插件。完美还原代码高亮、LaTeX 公式与表格层级。支持 Word、PDF、Markdown 等 7 种格式导出，让你的 AI 对话秒变专业文档。
-      </p>
-      <div class="hero-buttons">
-        <a href="#install" class="btn btn-primary" style="padding: 20px 100px;">⬇ 在线安装</a>
-        <a href="https://deepseek.aiwhaler.com/" target="_blank" class="btn btn-outline">离线安装（Chrome浏览器）</a>
-      </div>
-      <a href="#features" class="hero-cta-link">查看功能演示 →</a>
-
-      <div class="image-gallery"
-        style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 30px;">
-        <img src="images/banner-1.png" style="width: 100%; height: auto; display: block; border-radius: 10px;" alt="图片1">
-        <img src="images/banner-2.png" style="width: 100%; height: auto; display: block; border-radius: 10px;" alt="图片2">
-        <img src="images/banner-3.png" style="width: 100%; height: auto; display: block; border-radius: 10px;" alt="图片3">
-        <img src="images/banner-4.png" style="width: 100%; height: auto; display: block; border-radius: 10px;" alt="图片4">
-        <img src="images/banner-5.png" style="width: 100%; height: auto; display: block; border-radius: 10px;" alt="图片5">
-        <img src="images/banner-6.png" style="width: 100%; height: auto; display: block; border-radius: 10px;" alt="图片6">
-      </div>
-
-    </div>
-  </header>
-
-  <!-- Install Section -->
-  <section id="install" class="fade-in">
-    <div class="container">
-      <h2 class="section-title">选择你的浏览器，一键安装</h2>
-      <p class="section-subtitle">全面支持主流浏览器，无论你常用哪一款，都能获得一致的流畅体验。</p>
-      <div class="install-grid">
-        <div class="browser-card">
-          <div class="browser-icon"><img src="images/lowcode-2406140.png" style="width: 40px; height: 40px;"></div>
-          <h3>Chrome</h3>
-          <p>适配 Chrome 88 及以上版本，从 Chrome 应用商店一键添加。</p>
-          <a href="https://chromewebstore.google.com/detail/%E9%B2%B8%E9%B1%BCai%E5%8A%A9%E6%89%8B-deepseek%E5%AF%BC%E5%87%BAword/foegcdhddlencjjkaeonjahfcdlmlihl"
-            target="_blank" class="btn btn-outline" style="width:100%">添加到 Chrome</a>
-        </div>
-        <div class="browser-card">
-          <div class="browser-icon"><img src="images/lowcode-2406134.png" style="width: 40px; height: 40px;"></div>
-          <h3>Edge</h3>
-          <p>适配 Microsoft Edge 88 及以上版本，从 Edge 扩展商店安装。</p>
-          <a href="https://microsoftedge.microsoft.com/addons/detail/%E9%B2%B8%E9%B1%BCai%E5%8A%A9%E6%89%8B/lgfpicokhhemdpohohdlffponcillpfa"
-            class="btn btn-outline" target="_blank" style="width:100%">添加到 Edge</a>
-        </div>
-        <div class="browser-card">
-          <div class="browser-icon"><img src="images/lowcode-2406123.png" style="width: 40px; height: 40px;"></div>
-          <h3>360 浏览器</h3>
-          <p>适配 360 极速浏览器与 360 安全浏览器，从 360 扩展中心安装。</p>
-          <a href="https://ext.se.360.cn/#/extension-detail?id=hgahdgilffiglaefnmnkoclmigdaighg" class="btn btn-outline"
-            target="_blank" style="width:100%">添加到 360</a>
-        </div>
-        <div class="browser-card">
-          <div class="browser-icon"><img src="images/lowcode-2458186.jfif" style="width: 40px; height: 40px;"></div>
-          <h3>Firefox 火狐</h3>
-          <p>适配 Firefox 109 及以上版本，从 Firefox 附加组件商店安装。</p>
-          <a href="https://addons.mozilla.org/zh-CN/firefox/addon/deepseek%E5%AF%BC%E5%87%BAword-%E9%B2%B8%E9%B1%BCai%E5%8A%A9%E6%89%8B/"
-            class="btn btn-outline" target="_blank" style="width:100%">添加到 Firefox</a>
+    <!-- 主内容 -->
+    <main class="main-wrapper">
+      <div class="content-split" id="main-area">
+        <!-- 初始状态，稍后会被JS覆盖 -->
+        <div class="empty-state">
+          <div>正在加载模板...</div>
         </div>
       </div>
-      <p style="text-align:center; margin-top:32px; color:var(--text-secondary); font-size:0.9rem;">
-        不同浏览器的安装方式略有差异，若商店安装失败，可下载离线安装包手动加载。
-      </p>
-    </div>
-  </section>
-
-  <!-- Pain Points -->
-  <section class="pain-points fade-in">
-    <div class="container">
-      <h2 class="section-title">告别复制粘贴，重塑你的 AI 知识管理</h2>
-      <div class="cards-grid-3" style="margin-top: 64px;">
-        <div class="point-card">
-          <div class="point-icon"><img src="images/icon-1.png" style="width: 46px; height: 46px;"></div>
-          <h3>完美还原排版</h3>
-          <p>完整保留代码高亮、LaTeX 公式对齐、复杂表格与标题层级，导出即定稿，告别格式错乱。</p>
-        </div>
-        <div class="point-card">
-          <div class="point-icon"><img src="images/icon-3.png" style="width: 46px; height: 46px;"></div>
-          <h3>深度思考留存</h3>
-          <p>不仅导出答案，DeepSeek的“深度思考”过程也能一键打包带走，不漏掉任何逻辑推演。</p>
-        </div>
-        <div class="point-card">
-          <div class="point-icon"><img src="images/icon-2.png" style="width: 46px; height: 46px;"></div>
-          <h3>知识闭环管理</h3>
-          <p>从高亮标注、本地收藏到私密云盘，打造专属于你的 DeepSeek 第二大脑。</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Core Features -->
-  <section id="features" class="fade-in">
-    <div class="container">
-      <h2 class="section-title">强大的核心功能</h2>
-      <p class="section-subtitle">为深度使用 DeepSeek 的你量身打造</p>
-
-      <!-- Feature 1 -->
-      <div class="feature-item">
-        <div class="feature-text">
-          <h3>全能格式导出</h3>
-          <p>一键将 DeepSeek 对话转化为 Word (.docx)、PDF、Excel、HTML、ipynb、JSON、PNG 格式。无论你是写报告、做笔记还是做数据分析，总有一款格式适合你。</p>
-        </div>
-        <img src="images/banner-1.png" class="feature-des-img">
-      </div>
-
-      <!-- Feature 2 -->
-      <div class="feature-item reverse">
-        <div class="feature-text">
-          <h3>深度定制偏好设置</h3>
-          <p>你的文档你做主。自定义文档样式，调整 LaTeX 公式对齐（居中/居左），一键删除多余的分隔线与 Emoji 表情，甚至开启自动修复 Markdown 格式错误，让导出文档更专业。</p>
-        </div>
-        <img src="images/banner-2.png" class="feature-des-img">
-      </div>
-
-      <!-- Feature 3 -->
-      <div class="feature-item">
-        <div class="feature-text">
-          <h3>深度思考一键导出</h3>
-          <p>DeepSeek 的思考过程充满了启发性。开启该功能，你可以将“深度思考”模式下的推理过程与最终回答一并导出，绝佳的复盘与学习资料。</p>
-        </div>
-        <img src="images/banner-3.png" class="feature-des-img">
-      </div>
-
-      <!-- Feature 4 -->
-      <div class="feature-item reverse">
-        <div class="feature-text">
-          <h3>高效批量导出</h3>
-          <p>面对大量优质对话，无需逐一操作。支持多选对话进行批量导出，极大提升整理效率，专为重度 AI 使用者设计。</p>
-        </div>
-        <img src="images/banner-4.png" class="feature-des-img">
-      </div>
-
-      <!-- Feature 5 -->
-      <div class="feature-item">
-        <div class="feature-text">
-          <h3>高亮标注与内化</h3>
-          <p>像阅读电子书一样阅读 AI 的回答。拖选 DeepSeek 中的文字即可高亮，支持“普通、关注、重点、错误”4 个等级标记，帮你快速提取关键信息，构建阅读笔记。</p>
-        </div>
-        <img src="images/banner-5.png" class="feature-des-img">
-      </div>
-
-      <!-- Feature 6 -->
-      <div class="feature-item reverse">
-        <div class="feature-text">
-          <h3>智能收藏夹</h3>
-          <p>遇到好回答，一键加入收藏夹随时查阅。收藏夹内的内容支持批量导出为 Word 文档，让你的灵感库永不丢失。</p>
-        </div>
-        <img src="images/banner-6.png" class="feature-des-img">
-      </div>
-
-      <!-- Feature 7 -->
-      <div class="feature-item">
-        <div class="feature-text">
-          <h3>私密云盘与长期记忆</h3>
-          <p>每个用户配备大容量私密云盘。将导出的文档存入云盘，不仅方便跨设备下载，更可一键上传作为 DeepSeek 的专属知识库，打破上下文限制，赋予 DeepSeek 长期记忆能力。</p>
-        </div>
-        <img src="images/banner-7.png" class="feature-des-img">
-      </div>
-    </div>
-  </section>
-
-  <!-- Scenarios -->
-  <section id="scenarios" class="scenarios fade-in">
-    <div class="container">
-      <h2 class="section-title">为每一种创作场景赋能</h2>
-      <div class="cards-grid-3" style="margin-top: 64px;">
-        <div class="scenario-card">
-          <h3>学术与学习整理</h3>
-          <p>导出复杂的 LaTeX 公式和推导过程为 PDF/Word，打造个人学霸笔记，方便复习与论文撰写。</p>
-        </div>
-        <div class="scenario-card">
-          <h3>技术文档沉淀</h3>
-          <p>保留完美的代码高亮与层级结构，导出 Markdown 或 HTML，直接接入团队 Wiki 或个人博客。</p>
-        </div>
-        <div class="scenario-card">
-          <h3>数据分析与协作</h3>
-          <p>将 DeepSeek 生成的 Python 代码与逻辑导出为 ipynb，直接在 Jupyter 中运行验证，无缝衔接工作流。</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Privacy Highlight -->
-  <section class="fade-in">
-    <div class="container">
-      <div class="privacy-section">
-        <div class="browser-icon"
-          style="background: rgba(255,255,255,0.2); color: white; width: 80px; height: 80px; font-size: 2.5rem; margin: 0 auto 30px;">
-          <img src="images/icon-7.png" style="width: 46px; height: 46px;">
-        </div>
-        <h2>无痕模式：100% 隐私保护</h2>
-        <p>你的数据，只属于你。开启无痕模式后，所有数据与操作均在本地进行高强度加密处理，云端零存储，从技术底层 100% 保护你的隐私与商业机密。</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- Bottom CTA -->
-  <section class="cta-section fade-in">
-    <div class="container">
-      <h2 class="section-title">开始构建你的 DeepSeek 专属知识库</h2>
-      <p class="section-subtitle" style="margin-bottom: 40px;">免费下载 DeepSeek Exporter，让 AI 的每一次回答都发挥最大价值。</p>
-      <div class="hero-buttons">
-        <a href="https://www.aiwhaler.com/" target="_blank" class="btn btn-primary">在线使用</a>
-        <a href="#install" class="btn btn-outline">安装插件</a>
-      </div>
-    </div>
-  </section>
-
-  <!-- FAQ Section -->
-  <section id="faq" class="faq-section fade-in">
-    <div class="container">
-      <h2 class="section-title">常见问题 (FAQ)</h2>
-      <p class="section-subtitle">关于 DeepSeek Exporter 的一切疑问，在这里找到答案</p>
-      <div class="faq-list">
-        <div class="faq-item">
-          <div class="faq-question" onclick="toggleFaq(this)">
-            <span>Q1: 什么是 DeepSeek Exporter？它有哪些主要功能？</span>
-            <span class="faq-icon">+</span>
-          </div>
-          <div class="faq-answer">
-            <p>A: DeepSeek Exporter 是一款专为 DeepSeek 网页版开发的效率浏览器插件。它的核心功能是一键将 DeepSeek 的聊天记录导出为 Word
-              (.docx)、PDF、Markdown、HTML、ipynb、JSON 和 PNG 等多种格式。此外，它还集成了深度思考过程导出、批量导出、文字高亮标注、本地收藏夹、私密云盘以及无痕加密模式等高级知识管理功能。
-            </p>
-          </div>
-        </div>
-
-        <div class="faq-item">
-          <div class="faq-question" onclick="toggleFaq(this)">
-            <span>Q2: 如何将 DeepSeek 对话导出为 Word 或 PDF 文档？</span>
-            <span class="faq-icon">+</span>
-          </div>
-          <div class="faq-answer">
-            <p>A: 安装 DeepSeek Exporter 插件后，在 DeepSeek 网页端打开你想导出的对话，点击插件图标或对话旁的导出按钮，在弹出的菜单中选择你需要的格式（如 Word 或
-              PDF），即可一键下载保存到本地。插件会自动处理排版，无需复杂的配置。</p>
-          </div>
-        </div>
-
-        <div class="faq-item">
-          <div class="faq-question" onclick="toggleFaq(this)">
-            <span>Q3: 导出的文档会保留代码高亮和 LaTeX 数学公式吗？</span>
-            <span class="faq-icon">+</span>
-          </div>
-          <div class="faq-answer">
-            <p>A: 会的。DeepSeek Exporter 采用了高级文档渲染引擎，无论是导出为 Word、PDF 还是 Markdown，都能完整保留原有的代码语法高亮颜色、LaTeX
-              数学公式的正确排版，以及复杂表格的层级结构。确保导出的文档专业且无需二次排版，你还可以在偏好设置中自定义公式的对齐方式。</p>
-          </div>
-        </div>
-
-        <div class="faq-item">
-          <div class="faq-question" onclick="toggleFaq(this)">
-            <span>Q4: 可以导出 DeepSeek 的“深度思考”过程吗？</span>
-            <span class="faq-icon">+</span>
-          </div>
-          <div class="faq-answer">
-            <p>A: 完全可以。当你使用 DeepSeek-R1 等深度思考模式时，插件支持将 AI
-              的“思考过程”一并导出。这在整理学术复盘笔记、逻辑推演记录或技术分析时非常实用，思考过程会以特殊样式在导出的文档中与最终回答区分开来。</p>
-          </div>
-        </div>
-
-        <div class="faq-item">
-          <div class="faq-question" onclick="toggleFaq(this)">
-            <span>Q5: DeepSeek Exporter 支持哪些浏览器安装？</span>
-            <span class="faq-icon">+</span>
-          </div>
-          <div class="faq-answer">
-            <p>A: 我们全面支持主流浏览器，包括 Google Chrome、Microsoft Edge、360 极速/安全浏览器以及 Firefox
-              火狐浏览器。你可以直接在对应浏览器的官方扩展商店中搜索“DeepSeek Exporter”进行免费安装。</p>
-          </div>
-        </div>
-
-        <div class="faq-item">
-          <div class="faq-question" onclick="toggleFaq(this)">
-            <span>Q6: 使用插件和无痕模式，我的隐私和数据安全吗？</span>
-            <span class="faq-icon">+</span>
-          </div>
-          <div class="faq-answer">
-            <p>A: 非常安全。插件本身注重本地化体验，开启“无痕模式”后，你的所有对话数据、高亮标注和操作记录都会在本地进行高强度加密处理，云端绝对不会存储任何信息。这意味着从技术底层 100%
-              保护了你的隐私与商业机密，你可以放心用于工作敏感数据的处理。</p>
-          </div>
-        </div>
-
-        <div class="faq-item">
-          <div class="faq-question" onclick="toggleFaq(this)">
-            <span>Q7: 插件提供的云盘功能有什么用？能实现 DeepSeek 的长期记忆吗？</span>
-            <span class="faq-icon">+</span>
-          </div>
-          <div class="faq-answer">
-            <p>A: 是的。插件为每位用户提供大容量私密云盘。你不仅可以将导出的文档存入云盘方便跨设备随时下载，更核心的价值在于：你可以将云盘中的文档作为“知识库”上传给 DeepSeek。这打破了原有的上下文窗口限制，赋予
-              DeepSeek 专属于你的长期记忆能力。</p>
-          </div>
-        </div>
-
-        <div class="faq-item">
-          <div class="faq-question" onclick="toggleFaq(this)">
-            <span>Q8: 收藏夹和批量导出功能如何提升整理效率？</span>
-            <span class="faq-icon">+</span>
-          </div>
-          <div class="faq-answer">
-            <p>A: 面对海量优质对话，插件提供了高效的闭环管理。你可以将高价值的回答一键加入本地收藏夹随时查阅，收藏夹内的内容支持批量导出为 Word
-              文档。同时，在对话列表中，你也可以多选多条对话进行批量导出，免去了逐一复制的繁琐，极大提升了知识沉淀的效率。</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-
-  <!-- Footer -->
-  <footer>
-    <div class="container">
-      <div class="footer-content">
-        <div class="footer-col">
-          <h4>产品</h4>
-          <a href="#features">功能介绍</a>
-          <a href="https://www.aiwhaler.com/help/" target="_blank">使用教程</a>
-        </div>
-        <div class="footer-col">
-          <h4>支持</h4>
-          <a href="https://www.aiwhaler.com/help/" target="_blank">常见问题</a>
-          <a href="https://www.aiwhaler.com/help/" target="_blank">用户反馈</a>
-          <a href="https://www.aiwhaler.com/help/" target="_blank">联系我们</a>
-        </div>
-        <div class="footer-col">
-          <h4>法律</h4>
-          <a href="https://m.aiwhaler.com/privacy-policy-plugin-desp" target="_blank">隐私政策</a>
-          <a href="https://www.aiwhaler.com/ua/" target="_blank">服务条款</a>
-        </div>
-        <div class="footer-col">
-          <h4>工具</h4>
-          <a href="https://www.aiwhaler.com/" target="_blank">在线使用</a>
-          <a href="https://m.aiwhaler.com/desktop.html" target="_blank">桌面版应用</a>
-          <a href="https://m.aiwhaler.com/#download" target="_blank">移动端使用</a>
-        </div>
-      </div>
-      <div class="footer-bottom">
-        © 2026 DeepSeek Exporter. All rights reserved. <a href="https://beian.miit.gov.cn/">湘ICP备2024045717号-6</a>
-      </div>
-    </div>
-  </footer>
+    </main>
+  </div>
 
   <script>
-    // Navbar scroll effect
-    const navbar = document.getElementById('navbar');
-    window.addEventListener('scroll', () => {
-      if (window.scrollY > 30) {
-        navbar.classList.add('scrolled');
-      } else {
-        navbar.classList.remove('scrolled');
+    // ================== 数据部分 ==================
+    const PROMPT_DATA = [
+      {
+        "章节": "第2节：AI申论批改——从“写了白写”到“每篇都在进步”",
+        "小节": "4.1",
+        "标题": "通用批改版（适用于所有题型）",
+        "类型": "核心Prompt",
+        "Prompt模板": "你是一位有10年国考申论阅卷经验的资深教师，曾参与多省联考阅卷工作。请严格按照国考/省考评分标准，对以下作答进行专业批改。\n═══════════════════════════\n【题目要求】：[在此粘贴题目原文，包括作答要求、字数限制等]\n【给定材料】：[在此粘贴相关给定材料原文]\n【我的作答】：[在此粘贴你的完整作答]\n═══════════════════════════\n请按以下结构输出批改报告：\n一、总评（50字以内）\n用一句话概括这篇作答的整体水平，并给出预估分数（满分按题目实际分值）。\n二、四维评分（每项满分25分，总分100分）\n1. 立意/要点准确性（25分）：是否紧扣题目要求和材料主旨？要点是否齐全？有无跑偏或遗漏？\n2. 结构/逻辑完整性（25分）：层次是否清晰？段落之间是否有逻辑递进？\n3. 论证/分析充分性（25分）：论据是否来自材料？分析是否有深度？是否只是“贴标签”？\n4. 语言/表达规范性（25分）：是否使用规范书面语？有无口语化表达？表述是否精炼？\n每项评分请附1-2句具体说明（为什么给这个分，扣在哪里）。\n三、逐段点评\n对作答的每一段（或每一个要点），按以下格式点评：\n- 【原文摘录】：（引用该段关键句）\n- 【优点】：（这段做得好的地方，具体说）\n- 【问题】：（这段的具体问题，不要笼统）\n- 【修改建议】：（具体怎么改，最好给出改写示范）\n四、最关键的3个提分点（按优先级排序）\n列出如果只改3个地方就能明显提分的3个改动，每个附：\n- 问题描述\n- 为什么这个改动最重要\n- 具体修改示范（写出改后的文字）\n五、同题高分示范\n针对我最薄弱的环节，写一段75-80分水平的示范文字（150-200字），让我直观感受差距。\n六、下一步训练建议\n基于本次批改，建议我下一篇申论重点练什么、注意什么。\n七、批改档案（请自动生成以下格式的结构化记录，方便我直接复制保存）\n═══════════════════════════════════\n【申论批改档案】\n日期：（自动填写当天日期）\n题目来源：（根据题目信息自动判断，如“2024年国考地市级 第1题”）\n题型：（自动判断：概括题/分析题/对策题/大作文）\n【四维评分】\n立意/要点：__/25\n结构/逻辑：__/25\n论证/分析：__/25\n语言/表达：__/25\n总分：__/100\n【本次最核心的问题】（只写1-2个）\n1. _______\n2. _______\n【下一篇重点改进方向】\n_______\n═══════════════════════════════════"
+      },
+      {
+        "章节": "第2节：AI申论批改——从“写了白写”到“每篇都在进步”",
+        "小节": "4.3",
+        "标题": "概括题/归纳题 批改侧重追加",
+        "类型": "追加Prompt片段",
+        "关联": "需追加在4.1 Prompt末尾使用",
+        "Prompt模板": "本题为概括/归纳题，请额外关注：\n- 要点是否齐全（请对照材料逐条核查，列出我遗漏了哪些信息点）\n- 分类是否合理（如果题目要求分类，我的分类标准是否恰当）\n- 是否有多余信息（概括题不需要分析、不需要对策，我是否“多写了”）\n- 字数是否合规\n- 请用“要点核对表”形式，列出材料中所有应概括的要点，并逐条标注我是否覆盖（✓/✗）"
+      },
+      {
+        "章节": "第2节：AI申论批改——从“写了白写”到“每篇都在进步”",
+        "小节": "4.3",
+        "标题": "分析题 批改侧重追加",
+        "类型": "追加Prompt片段",
+        "关联": "需追加在4.1 Prompt末尾使用",
+        "Prompt模板": "本题为分析题，请额外关注：\n- 是否完成了“解释含义→多角度分析→总结/对策”的完整层次\n- 分析是否有深度（是否只是复述材料，还是有自己的分析逻辑）\n- 是否回应了题目中的限定词（如“结合给定材料3”→是否只用了材料3）"
+      },
+      {
+        "章节": "第2节：AI申论批改——从“写了白写”到“每篇都在进步”",
+        "小节": "4.3",
+        "标题": "对策题/建议题 批改侧重追加",
+        "类型": "追加Prompt片段",
+        "关联": "需追加在4.1 Prompt末尾使用",
+        "Prompt模板": "本题为对策/建议题，请额外关注：\n- 对策是否针对材料中的具体问题（而非泛泛而谈）\n- 对策是否具体可操作（避免“加强领导”“提高认识”等空话）\n- 是否注意了题目中的身份限定（如“假如你是某社区工作人员”）\n- 对策之间是否有逻辑（并列/递进），而非随意堆砌"
+      },
+      {
+        "章节": "第2节：AI申论批改——从“写了白写”到“每篇都在进步”",
+        "小节": "4.3",
+        "标题": "大作文 批改侧重追加",
+        "类型": "追加Prompt片段",
+        "关联": "需追加在4.1 Prompt末尾使用",
+        "Prompt模板": "本题为大作文（议论文），请额外关注：\n- 立意是否准确（是否紧扣材料主旨和题目要求，有无跑题风险）\n- 标题是否恰当（是否体现论点）\n- 开头是否快速入题（前3句是否让阅卷者看到你的观点）\n- 分论点是否清晰（每段首句是否能让阅卷者3秒内抓住论证框架）\n- 论证是否有“材料+分析”（不能只有观点没有支撑，也不能只抄材料没有分析）\n- 结尾是否回扣主题（而非另起新话题）\n- 全文是否有“一条线”贯穿"
+      },
+      {
+        "章节": "第2节：AI申论批改——从“写了白写”到“每篇都在进步”",
+        "小节": "6.1",
+        "标题": "二次批改Prompt",
+        "类型": "核心Prompt",
+        "Prompt模板": "这是我根据上次批改意见修改后的版本。请对比前后两版，进行二次批改。\n【题目要求】：[粘贴题目原文（和第一次一样，直接复制）]\n【给定材料】：[粘贴材料原文（和第一次一样，直接复制）]\n【修改前版本】：[粘贴你的原始作答]\n【修改后版本】：[粘贴你修改后的作答]\n【我本次重点修改的方向】：[用1-2句话写你改了什么。例如：“1.补充了第3段的论证分析；2.把口语化表达改成了政策语言”]\n请输出：\n1. 修改效果评估：我改的方向对不对？改到位了吗？\n2. 改好了的地方：哪些修改是有效的，分数提升了多少？\n3. 没改到位的地方：哪些问题我试图改了但还没改好？为什么？\n4. 新引入的问题：修改过程中是否产生了新问题？\n5. 当前版本预估分数（与修改前对比）\n6. 如果还要再改一轮，最该改什么？\n最后，请更新批改档案，输出以下格式：\n═══════════════════════════════════\n【申论批改档案·二次批改更新】\n日期：（自动填写当天日期）\n题目来源：（根据题目信息自动判断）\n【第一次评分】\n总分：__/100\n【第二次评分】\n总分：__/100\n【分数变化】：从__分 → __分（提升__分）\n【已改好的问题】\n_______\n【仍未改到位的问题】\n_______\n【下一篇重点改进方向】\n_______\n═══════════════════════════════════"
+      },
+      {
+        "章节": "第2节：AI申论批改——从“写了白写”到“每篇都在进步”",
+        "小节": "7.1",
+        "标题": "升格批改Prompt",
+        "类型": "进阶Prompt",
+        "适用场景": "知道问题但“不知道怎么改”时的救星，用于将低分文章升格为高分文章",
+        "Prompt模板": "请对以下申论作答进行“升格改写”：保持我的原始立意和主要观点不变，将全文升格为75分水平。\n【题目要求】：[粘贴题目原文]\n【给定材料】：[粘贴材料原文]\n【我的作答】：[粘贴你的作答]\n请逐段改写，每段按以下格式输出：\n- 【我的原文】：（引用）\n- 【升格改写】：（改写后的文字）\n- 【改动说明】：（改了什么？为什么这样改？用了什么技巧？）\n最后请总结：\n- 我的作答与75分水平之间，最核心的3个差距是什么？\n- 我可以通过什么训练方法缩小这些差距？"
+      },
+      {
+        "章节": "第2节：AI申论批改——从“写了白写”到“每篇都在进步”",
+        "小节": "7.2",
+        "标题": "模拟阅卷Prompt",
+        "类型": "进阶Prompt",
+        "适用场景": "训练“第一眼得分”能力，模拟阅卷老师快速批改的场景",
+        "Prompt模板": "请你模拟一位高强度阅卷的申论阅卷老师。你今天下午需要批改200份试卷，每份大作文只有90秒。请以这个速度和心态，快速阅读以下作答，给出你的“第一印象评分”：\n【题目要求】：[粘贴题目原文]\n【我的作答】：[粘贴你的作答]\n请输出：\n1. 90秒内你注意到了什么？（标题→开头→每段首句→结尾，你实际“看到”了什么）\n2. 第一印象分数（满分40分的大作文，你第一反应给多少分？）\n3. 第一眼亮点（有没有哪个句子/表达让你眼前一亮？）\n4. 第一眼硬伤（有没有哪个问题让你立刻扣分？）\n5. 如果我是你的学生，你会给我什么“考场生存建议”？"
+      },
+      {
+        "章节": "第2节：AI申论批改——从“写了白写”到“每篇都在进步”",
+        "小节": "7.3",
+        "标题": "多版本对比Prompt",
+        "类型": "进阶Prompt",
+        "适用场景": "同一段论证写了两个版本，不确定哪个更好",
+        "Prompt模板": "以下是同一段申论论证的两个版本，请对比分析哪个更好，为什么：\n【版本A】：[粘贴你的第一个版本]\n【版本B】：[粘贴你的第二个版本]\n请从以下维度对比：\n- 论点清晰度\n- 论证充分性\n- 语言精炼度\n- 与材料的贴合度\n- 阅卷者视角的“得分感”\n如果两个版本各有优劣，请取两者之长，写出一个“版本C”（最优版本）。"
+      },
+      {
+        "章节": "第3节：AI申论写作（上）——材料精准提炼与审题破题",
+        "小节": "4.1",
+        "标题": "材料结构化分析（通用版）",
+        "类型": "核心Prompt",
+        "Prompt模板": "你是一位有10年国考申论命题研究经验的教研专家，精通申论材料的编排逻辑和出题思路。请对以下申论给定材料进行深度结构化分析。\n═══════════════════════════\n【给定材料】：[在此粘贴全部给定材料原文]\n【题目要求】：[在此粘贴本套试卷的所有题目题干及作答要求]\n═══════════════════════════\n请按以下结构输出分析报告：\n一、材料主旨（一句话）\n用一句话概括这组材料的核心议题和命题意图。\n二、材料结构图\n按“材料X → 核心内容 → 在全文中的作用”格式，逐则梳理：\n- 材料1：讲了什么 → 作用是什么（如：引出问题/提供案例/给出对策）\n- 材料2：……\n- …..\n最后用一句话说明材料之间的逻辑关系（并列/递进/对比/总分）。\n三、关键信息分类提取\n将材料中的所有关键信息按以下四类归档（每条信息标注出处“材料X第X段”）：\n  【问题/现状】：材料反映了哪些问题、困境、不足？\n  【原因】：材料中直接或间接给出了哪些原因？\n  【对策/做法】：材料中提到了哪些解决措施、成功经验？\n  【意义/效果】：材料中体现了哪些积极意义、成效？\n四、各题作答要点预判\n针对每道题目，预判：\n- 该题主要对应哪几则材料？\n- 作答需要覆盖哪些关键信息点？（逐条列出）\n- 该题的“坑”在哪里？（考生最容易漏什么、错什么？）\n五、大作文立意分析\n- 本套材料的核心话题是什么？\n- 如果出大作文，最稳妥的总论点是什么？\n- 可能的3个分论点方向（每个分论点用一句话表述）\n- 哪些材料中的案例/数据可以直接用作论据？\n六、我的理解对照（如果我在Prompt中附上了自己的初步理解）\n请对比我的理解和你的分析：\n- 我理解对了什么？\n- 我遗漏了什么？\n- 我理解偏了什么？\n- 我的材料阅读方法需要怎么改进？"
+      },
+      {
+        "章节": "第3节：AI申论写作（上）——材料精准提炼与审题破题",
+        "小节": "6.1",
+        "标题": "审题Prompt（通用版）",
+        "类型": "核心Prompt",
+        "Prompt模板": "你是一位有10年国考申论阅卷经验的资深教师。请帮我精准拆解以下申论题目的作答要求。\n═══════════════════════════\n【题目】：[在此粘贴题目原文，包括题干和作答要求（如字数限制、分值等）]\n【相关给定材料】：[在此粘贴该题对应的材料原文]\n═══════════════════════════\n请输出：\n一、题目拆解\n- 作答对象：题目让你做什么？（概括/分析/提对策/写文章）\n- 作答范围：从哪几则材料中找答案？\n- 作答要求：字数限制、格式要求、特殊限定词（如“分类归纳”“条理清晰”）\n- 身份限定：有没有指定你的身份？（如“假如你是某社区工作人员”）\n二、作答层次\n这道题的答案应该分几个层次/部分来写？每个层次写什么？（如分析题：解释含义→多角度分析→总结/对策）\n三、关键限定词解读\n题目中有哪些“限定词”容易被忽略？忽略会导致什么后果？（如“结合给定材料3”→只能用材料3，不能用其他材料）\n四、高分作答框架\n请给出这道题的高分作答框架（不是完整答案，而是“骨架”）：\n- 第一层写什么（几句话）\n- 第二层写什么\n- …..\n- 注意：框架中的每个要点请标注“来自材料X第X段”\n五、常见审题误区\n考生做这道题最容易犯什么审题错误？（列出2-3个）"
+      },
+      {
+        "章节": "第3节：AI申论写作（上）——材料精准提炼与审题破题",
+        "小节": "6.3",
+        "标题": "大作文审题的“三定法”",
+        "类型": "核心Prompt",
+        "Prompt模板": "你是一位有10年国考申论命题研究经验的教研专家。请帮我用“三定法”完成以下大作文的审题破题。\n═══════════════════════════\n【大作文题目要求】：[在此粘贴大作文题目原文]\n【给定材料】：[在此粘贴全部给定材料原文]\n═══════════════════════════\n请按“三定法”输出：\n【一定：定话题】\n- 这组材料的核心话题是什么？（不是你自己“感觉”的话题，而是材料实际在讨论的话题）\n- 题目中的关键词是什么？这些关键词在材料中对应什么内容？\n【二定：定角度】\n- 题目中有没有角度限定？（如“以‘变与不变’为主题”→必须写两者的辩证关系）\n- 如果有“结合给定材料X”的限定，该材料的核心观点是什么？\n- 写这篇作文，最稳妥的切入角度是什么？最容易被忽略的角度是什么？\n【三定：定论点】\n请基于材料和题目要求，提供3种立意方案：\n方案一：\n- 总论点：（一句话）\n- 分论点1：（15字以内）\n- 分论点2：（15字以内）\n- 分论点3：（15字以内）\n- 分论点关系：并列/递进/对比\n- 优势：\n- 风险：\n- 推荐指数：★★★\n方案二：（同上格式）\n方案三：（同上格式）\n【最终建议】\n- 如果你是我，你会选哪个方案？为什么？\n- 这个方案在考场上最容易写出彩的段落是哪个？\n- 哪些材料中的案例/数据可以直接用作论据？（标注出处）"
+      },
+      {
+        "章节": "第3节：AI申论写作（上）——材料精准提炼与审题破题",
+        "小节": "7.1",
+        "标题": "对比分析Prompt",
+        "类型": "进阶Prompt",
+        "适用场景": "了解同一主题在不同年份真题中是怎么考的，出题角度有什么变化",
+        "Prompt模板": "请对比分析以下两套申论真题的材料，找出异同：\n【第一套】：[粘贴年份+材料原文1]\n【第二套】：[粘贴年份+材料原文2]\n请输出：\n1. 两套材料的核心话题有什么相同点和不同点？\n2. 出题角度有什么变化？（如：2022年侧重“问题”，2024年侧重“对策”）\n3. 材料编排逻辑有什么不同？\n4. 如果2026年再考这个主题，最可能从什么角度出题？\n5. 基于这个趋势，我备考时应该重点积累什么？"
+      },
+      {
+        "章节": "第3节：AI申论写作（上）——材料精准提炼与审题破题",
+        "小节": "7.2",
+        "标题": "反向推导Prompt",
+        "类型": "进阶Prompt",
+        "适用场景": "做完题发现自己漏了很多要点，想分析“我为什么漏了”",
+        "Prompt模板": "以下是我做的一道申论概括题，我漏掉了多个要点。请帮我分析“我为什么漏了”以及“下次怎么不漏”。\n【题目】：[粘贴题目原文]\n【给定材料】：[粘贴材料原文]\n【参考答案/高分答案】：[粘贴参考答案]\n【我的作答】：[粘贴你的作答]\n请输出：\n1. 要点覆盖对比：参考答案有哪些要点？我覆盖了哪些？漏了哪些？\n2. 遗漏原因分析：我漏掉的每个要点，在材料中的什么位置？我为什么会漏？\n   （如：该要点在材料第4段最后一句，属于“补充性信息”，容易被忽略）\n3. 材料阅读改进建议：基于我这次的遗漏模式，我读材料时应该注意什么？\n4. “要点信号词”总结：这道题中，哪些词/句式是“要点即将出现”的信号？\n   （如：“此外”“与此同时”“值得注意的是”后面往往跟着新要点）"
+      },
+      {
+        "章节": "第3节：AI申论写作（上）——材料精准提炼与审题破题",
+        "小节": "7.3",
+        "标题": "限时模拟Prompt",
+        "类型": "进阶Prompt",
+        "适用场景": "训练考场材料阅读速度，在有限时间内抓住关键信息",
+        "Prompt模板": "请你扮演一位申论备考教练，帮我做一次“限时材料阅读训练”。\n【给定材料】：[粘贴材料原文]\n【题目】：[粘贴全部题目]\n训练规则：\n1. 请你先告诉我：如果只有15分钟读这组材料，我应该按什么顺序读？每则材料花多少时间？重点看什么？\n2. 然后请你用“3分钟速读版”告诉我：如果只有3分钟，这组材料最核心的5条信息是什么？\n3. 最后请你用“要点清单”形式列出：答完所有题目，最少需要抓住材料中的哪些信息？（按题目分组）\n目的：帮我建立“考场上快速抓重点”的能力，而不是逐字逐句精读。"
+      },
+      {
+        "章节": "第4节：AI申论写作（下）——论证优化与语言升格",
+        "小节": "4.1",
+        "标题": "论证优化Prompt（核心通用）",
+        "类型": "核心Prompt",
+        "Prompt模板": "你是一位有10年国考申论阅卷经验的资深教师，同时精通议论文写作教学。请对我的大作文进行“论证优化”专项诊断和指导。\n═══════════════════════════\n【大作文题目要求】：[在此粘贴大作文题目原文，包括话题、角度限定、字数要求等]\n【给定材料】：[在此粘贴全部给定材料原文。如果材料太长，可以粘贴第3节中DeepSeek生成的“材料分析报告”中的“关键信息分类提取”和“大作文立意分析”部分]\n【我的大作文初稿】：[在此粘贴你的完整大作文初稿]\n【我的具体困惑】（选填，没有可删除此项）：[在此写你最想解决的问题，如“分论点论证太单薄”“不知道怎么用材料中的案例”“语言太口语化”等]\n═══════════════════════════\n请按以下结构输出：\n一、论证结构诊断\n- 我的总论点是什么？是否准确回应了题目要求？\n- 我的分论点有几个？分论点之间的关系是什么（并列/递进/对比）？\n- 分论点是否都能支撑总论点？有没有“偏”的分论点？\n- 整体论证结构是否完整？（提出问题→分析问题→解决问题）\n二、逐段论证诊断\n对每个主体段落（分论点段），逐一诊断：\n- 该段的论证方法是什么？（举例/对比/因果/引用/道理论证）\n- 论证是否充分？（有没有“只有观点没有论据”或“只有论据没有分析”的问题？）\n- 论据是否具体？（是“某地做了某事”还是泛泛的“有些地方”？）\n- 论据与论点的关联是否紧密？（论据能不能直接证明这个分论点？）\n- 该段最大的论证缺陷是什么？\n三、逐段优化方案\n对每个需要优化的段落，给出：\n- 原文（引用我的原句）\n- 问题（一句话说明问题）\n- 优化方向（不是直接给我改好的文字，而是告诉我“应该补什么、怎么补”）\n- 可用论据（从给定材料中找出可以直接用的案例/数据，标注“材料X第X段”）\n- 优化示例（给出一段优化后的示范文字，供我参考学习，但我要自己重写）\n四、论证方法升级建议\n- 我目前主要用了什么论证方法？\n- 我缺少什么论证方法？（如：全文只有举例论证，缺少对比论证和因果分析）\n- 针对这篇作文，最适合补充的2种论证方法是什么？怎么用？\n五、语言问题标注\n- 标出我作文中“空话套话”的句子（如“我们要高度重视”“具有重要意义”）\n- 标出“口语化”的表达（如“搞好”“弄好”“老百姓”）\n- 标出“重复用词”（如连续3段都用“要”“应该”开头）\n- 对每处问题，给出1-2个升格替换建议\n六、总评与优先级\n- 如果只能改3个地方，最应该先改哪3个？（按提分效果排序）\n- 我的作文目前处于什么水平？（一类文/二类文/三类文/四类文）\n- 改完后预计能提升多少分？"
+      },
+      {
+        "章节": "第4节：AI申论写作（下）——论证优化与语言升格",
+        "小节": "4.3",
+        "标题": "语言升格Prompt（专项）",
+        "类型": "核心Prompt",
+        "Prompt模板": "你是一位精通申论写作语言的教研专家，擅长将平淡的表述升格为有质感、有政策高度的申论语言。请对我的大作文进行“语言升格”专项训练。\n═══════════════════════════\n【我的大作文初稿】：[在此粘贴你的完整大作文初稿]\n【大作文题目要求】：[在此粘贴题目原文]\n═══════════════════════════\n请按以下方式输出：\n一、语言问题总览\n- 我的语言整体处于什么水平？（口语化/平铺直叙/有一定文采/较好）\n- 最突出的3个语言问题是什么？\n二、逐句升格对照表\n找出我作文中需要升格的句子（至少10处），按以下格式输出：\n| 序号 | 我的原文 | 问题类型 | 升格后 | 升格方法 |\n|------|----------|----------|--------|----------|\n| 1 | “我们要重视这个问题” | 空话套话 | “这一问题关乎群众的切身利益，是治理现代化绕不过去的‘必答题’” | 具体化+比喻 |\n| 2 | …… | …… | …… | …… |\n问题类型包括：空话套话/口语化/重复用词/缺乏节奏/缺乏政策高度/比喻不当\n三、升格方法总结\n基于我的作文，总结我最需要掌握的3种语言升格方法：\n- 方法名称\n- 适用场景\n- 操作要领（怎么把“平淡句”变成“有质感的句子”）\n- 3个练习示例（原文→升格文）\n四、政策语言替换库\n针对我这篇作文的主题，列出10个可以直接替换使用的“政策语言/规范表述”：\n| 我可能写的口语化表达 | 对应的政策语言/规范表述 |\n|---------------------|----------------------|\n| “让老百姓过上好日子” | “增进民生福祉，提升群众获得感、幸福感、安全感” |\n| …… | …… |\n五、节奏感训练\n- 标出我作文中“节奏单调”的段落（如连续5句都是“主语+谓语+宾语”结构）\n- 给出“长短句交替”“排比”“对仗”的具体修改示范"
+      },
+      {
+        "章节": "第4节：AI申论写作（下）——论证优化与语言升格",
+        "小节": "6.1",
+        "标题": "二次诊断Prompt",
+        "类型": "核心Prompt",
+        "Prompt模板": "你是一位有10年国考申论阅卷经验的资深教师。我之前写了一篇大作文，你（或另一位老师）已经给过一轮论证优化建议，我根据建议做了修改。请对我的修改稿进行二次诊断。\n═══════════════════════════\n【大作文题目要求】：[在此粘贴题目原文]\n【我的修改稿】：[在此粘贴你修改后的完整作文]\n【第一轮诊断中指出的主要问题】：[在此简要列出第一轮AI指出的2-3个核心问题，如“分论点2论证单薄，缺少具体案例”“语言口语化严重”“缺少对比论证”]\n═══════════════════════════\n请输出：\n一、修改效果评估\n- 第一轮指出的问题，我改好了哪些？改得怎么样？\n- 哪些问题还没改好？为什么？（是方向不对还是执行不到位？）\n- 修改过程中有没有引入新问题？（如：为了加论据导致段落过长、为了升格语言导致表达不自然）\n二、剩余问题清单\n- 目前还有哪些问题需要继续优化？（按优先级排序）\n- 每个问题的具体修改建议\n三、分数预估\n- 修改前的水平：约__分（满分40分）\n- 修改后的水平：约__分\n- 如果要再提升2-3分，最该在哪个方面发力？\n四、“考场可复用”的亮点\n- 我这篇修改稿中，哪些句子/论证方式/结构是“考场上可以直接复用”的？\n- 请帮我提炼出来，作为我的“写作模板素材”"
+      },
+      {
+        "章节": "第4节：AI申论写作（下）——论证优化与语言升格",
+        "小节": "7.1",
+        "标题": "论证方法专项训练Prompt",
+        "类型": "进阶Prompt",
+        "适用场景": "发现自己每次写论证都只会“举例论证”，缺少其他论证方法",
+        "Prompt模板": "你是一位精通议论文写作教学的教研专家。请帮我做“论证方法专项训练”。\n═══════════════════════════\n【我的分论点】：[在此粘贴你作文中的一个分论点句，如“数字赋能是提升基层治理效能的关键路径”]\n【对应的给定材料】：[在此粘贴该分论点可用的材料段落]\n【我目前的论证】：[在此粘贴你目前写的这个段落的论证文字（3-5句话即可）]\n═══════════════════════════\n请输出：\n一、我目前的论证方法诊断\n- 我用了什么论证方法？\n- 效果如何？有什么不足？\n二、5种论证方法示范\n针对这个分论点，分别用以下5种论证方法写一段示范（每段80-120字）：\n1. 举例论证（用材料中的具体案例）\n2. 对比论证（正面做法 vs 反面问题）\n3. 因果分析（为什么这个分论点成立？因果链条是什么？）\n4. 引用论证（引用政策文件/领导人讲话/经典表述）\n5. 数据论证（用材料中的数据或合理推断）\n三、组合建议\n- 这个分论点最适合用哪2种论证方法的组合？为什么？\n- 请给出一个“组合论证”的完整段落示范（150-200字）\n四、举一反三\n- 如果我的另外两个分论点是[在此写你的另外两个分论点]，分别最适合用什么论证方法组合？"
+      },
+      {
+        "章节": "第4节：AI申论写作（下）——论证优化与语言升格",
+        "小节": "7.2",
+        "标题": "“口语→政策语言”批量转换训练Prompt",
+        "类型": "进阶Prompt",
+        "适用场景": "知道自己的语言太口语化，每次写的时候“顺手就写出口语了”，需要刻意训练“翻译”能力",
+        "Prompt模板": "你是一位申论语言训练专家。请帮我做“口语→政策语言”的转换训练。\n═══════════════════════════\n【我写的句子】：[在此粘贴你作文中5-10个你觉得“太口语化”或“太平淡”的句子]\n【作文主题】：[在此写你这篇作文的主题，如“基层治理”“乡村振兴”“数字经济”]\n═══════════════════════════\n请对每个句子输出：\n| 我的原文 | 问题 | 升格版本1（稳健型） | 升格版本2（文采型） | 用了什么方法 |\n|----------|------|-------------------|-------------------|-------------|\n然后：\n1. 总结我“口语化”的规律（如：总是用“搞”“弄”“老百姓”等词）\n2. 给我一份“该主题下的高频政策表述”清单（20个），格式：\n   口语说法 → 政策表述\n3. 出5道“翻译练习题”：给我5个口语化句子，让我自己尝试升格，然后你给出参考答案"
+      },
+      {
+        "章节": "第4节：AI申论写作（下）——论证优化与语言升格",
+        "小节": "7.3",
+        "标题": "高分范文“论证拆解”学习Prompt",
+        "类型": "进阶Prompt",
+        "适用场景": "看到一篇高分范文，想知道“它为什么好”，把好的论证方法学到手",
+        "Prompt模板": "你是一位有10年申论教研经验的专家。请帮我拆解以下高分范文的论证方法，让我能学到具体的写作技巧。\n═══════════════════════════\n【大作文题目】：[在此粘贴题目原文]\n【高分范文】：[在此粘贴范文全文]\n═══════════════════════════\n请输出：\n一、论证结构图\n- 总论点是什么？\n- 分论点1/2/3分别是什么？\n- 分论点之间的关系？\n- 开头和结尾分别用了什么方法？\n二、逐段论证方法拆解\n对每个主体段落：\n- 论证方法：（举例/对比/因果/引用/数据……）\n- 论证链条：（观点→论据→分析→回扣论点，具体是怎么展开的？）\n- 亮点：（这个段落最出彩的地方是什么？为什么出彩？）\n- 可复用句式：（哪些句式/结构我可以直接学到自己的作文中？）\n三、语言特色分析\n- 这篇范文的语言风格是什么？（严谨型/文采型/兼具型）\n- 用了哪些修辞手法？效果如何？\n- 有哪些“政策语言”用得特别自然？（不是硬塞的）\n- 节奏感是怎么做到的？（长短句、排比、对仗的使用）\n四、“偷师”清单\n- 这篇范文中，我最应该学到的3个写作技巧是什么？\n- 每个技巧：是什么→怎么用→在我的作文中怎么落地\n- 给出3个“仿写练习”：基于范文的句式/结构，换一个主题让我仿写"
+      },
+      {
+        "章节": "第5节：AI时政热点解读（上）——热点筛选与考点转化",
+        "小节": "4.1",
+        "标题": "月度热点筛选Prompt（核心）",
+        "类型": "核心Prompt",
+        "Prompt模板": "你是一位深谙国考/省考命题规律的公考教研专家，有15年时政研究和命题分析经验。请从近[在此填写时间范围，如“3个月（2026年4月-6月）”]的时政热点中，筛选出考公最可能考到的热点。\n═══════════════════════════\n【基本信息】：\n- 时间范围：[如“2026年4月-6月”]\n- 目标考试：[如“2026年国考地市级”/“2027年XX省省考”]\n- 我已知的热点（可选）：[如“新质生产力、以旧换新、乡村振兴我已经了解了，不用重复”]\n- 我的薄弱环节（可选）：[如“我对经济类政策不太敏感，请侧重经济方向”]\n═══════════════════════════\n请按以下分级输出：\n【必考级】（极大概率出现在试卷中，3-5个）\n每个热点请说明：\n- 热点事件/政策名称\n- 核心内容（用3-5句话概括，让我快速了解“这是什么”）\n- 为什么必考（与哪个考试模块关联？命题角度是什么？）\n- 可能的出题形式（行测常识？申论主题？面试题目？具体怎么出？）\n- 考生最容易犯的错误（如：混淆概念、记错时间、理解偏颇）\n【高频级】（较大概率涉及，5-8个）\n每个热点请说明：\n- 热点名称\n- 核心内容（2-3句话）\n- 可能的出题角度（1-2个）\n- 需要记住的关键信息（如：提出时间、核心表述、关键数据）\n【了解级】（可能作为背景材料出现，5-10个）\n- 简要列出名称+一句话说明即可\n筛选标准（请严格遵守）：\n- 中央重大会议/文件/政策优先（如：中央经济工作会议、政府工作报告、二十大报告）\n- 与民生、治理、发展直接相关的优先\n- 有明确“可考角度”的优先（不是所有热点都适合出题）\n- 排除纯娱乐/体育/国际八卦类新闻\n- 排除已经“过时”的热点（如：3个月前的短期事件，已无后续影响）\n最后，请给出：\n【本月时政学习优先级建议】\n- 如果只有3小时，我应该重点学哪2个热点？\n- 如果有6小时，我应该怎么分配？\n- 如果只有30分钟，我至少应该记住什么？"
+      },
+      {
+        "章节": "第5节：AI时政热点解读（上）——热点筛选与考点转化",
+        "小节": "4.2",
+        "标题": "考点转化Prompt（核心）",
+        "类型": "核心Prompt",
+        "Prompt模板": "你是一位有15年公考教研经验的专家，精通行测、申论、面试的命题规律和答题方法。请对以下时政热点进行“考公考点转化”分析，让我知道这个热点“在考场上怎么考、我怎么答”。\n═══════════════════════════\n【热点】：[在此填写热点名称和核心内容]\n【我的目标考试】：[如“2026年国考地市级”]\n【我目前的了解程度】：[如“只知道‘新质生产力’这个词，具体内涵不清楚”]\n═══════════════════════════\n请输出：\n一、热点核心解读（帮我真正“理解”这个热点）\n- 这个政策/事件的“一句话本质”是什么？\n- 为什么现在提出？（时代背景）\n- 核心内涵是什么？（用“大白话”解释，不要照搬文件语言）\n- 和之前的相关政策有什么区别/联系？\n- 用1个生活中的类比帮我理解（如：“新质生产力就像从‘手工织布’到‘智能工厂’的跃迁”）\n二、行测考法\n- 常识判断：可能考什么？（列出3-5个具体考点）\n  - 考点1：（如“新质生产力的首次提出时间和场合”）\n  - 考点2：（如“新质生产力的三个核心特征”）\n  - 考点3：……\n  - 每个考点附1道模拟题（4选1+解析）\n- 言语理解：可能作为什么类型的文段出现？（主旨题/细节题/语句排序）\n- 判断推理：可能以什么逻辑形式出题？（如：定义判断考“新质生产力”的定义）\n- 资料分析：可能涉及什么数据？（如：研发投入、高技术产业增速）\n三、申论考法\n- 可能作为哪道题的材料背景？（概括题/分析题/对策题/大作文）\n- 如果出概括题：可能概括什么？（如“概括当前发展新质生产力面临的主要挑战”）\n- 如果出分析题：可能分析什么？（如“分析‘以旧换新’政策对消费升级的推动作用”）\n- 如果出对策题：可能让你提什么对策？\n- 如果出大作文：\n  - 可能的题目（2-3个）\n  - 立意方向（2种）\n  - 分论点框架（每种立意给3个分论点）\n  - 考生最容易跑偏的方向（如“把新质生产力等同于科技创新，忽略制度创新和模式创新”）\n四、面试考法\n- 可能的综合分析题题目（2-3个）\n- 答题框架（总-分-总）\n- 答题要点（每个要点1-2句话）\n- 加分表述（让考官眼前一亮的表达）\n五、核心表述积累\n- 官方原文金句（5-8句，标注出处，如“2026年政府工作报告指出：……”）\n- 关键数据（5个，如“2025年我国研发经费投入强度达2.68%”）\n- 关联政策/文件（3-5个，体现知识广度）\n- 易混概念辨析（如“新质生产力 vs 科技创新 vs 产业升级”的区别）\n六、“一句话记忆”\n- 如果考场上我只能记住关于这个热点的1句话，应该是什么？\n- 如果只能记住3个关键词，是哪3个？"
+      },
+      {
+        "章节": "第5节：AI时政热点解读（上）——热点筛选与考点转化",
+        "小节": "6.1",
+        "标题": "月度检测Prompt",
+        "类型": "核心Prompt",
+        "Prompt模板": "你是一位公考行测/申论命题专家。请基于以下本月必考级热点，出一套“时政掌握度检测题”，检验我是否真正掌握了这些热点。\n═══════════════════════════\n【本月必考级热点】：\n热点1：[名称+一句话核心1]\n热点2：[名称+一句话核心2]\n热点3：[名称+一句话核心3]\n\n【我的目标考试】：[如“2026年国考地市级”]\n═══════════════════════════\n请出题：\n一、行测常识题（5道）\n- 每个热点至少出1道\n- 4选1格式\n- 干扰项要“像真的”（如：时间差一个月、概念偷换、张冠李戴）\n- 附答案+解析（解析中标注“这道题考的是哪个考点”）\n二、申论小题（1道）\n- 基于某个热点，出一道概括题或分析题\n- 给出200-300字的模拟材料\n- 附参考答案（标注得分要点）\n三、申论大作文（1道）\n- 基于某个热点，出一道大作文题\n- 给出题目要求\n- 附：立意建议+分论点框架+开头示范\n- 附：考生最容易犯的错误（如跑题方向）\n四、面试综合分析题（1道）\n- 基于某个热点，出一道面试题\n- 附：答题框架+要点+加分表述\n五、评分标准\n- 我做完后告诉你我的答案，请帮我评分\n- 每道题标注“我答对了什么/漏了什么/错了什么”\n- 给出“时政掌握度”评级：A（完全掌握）/B（基本掌握）/C（有盲区）/D（需要重学）"
+      },
+      {
+        "章节": "第5节：AI时政热点解读（上）——热点筛选与考点转化",
+        "小节": "7.1",
+        "标题": "“热点关联网络”Prompt",
+        "类型": "进阶Prompt",
+        "适用场景": "你积累了3个月的热点（15-20个），想把它们串成“网络”，理解热点之间的关联",
+        "Prompt模板": "你是一位有15年公考教研经验的专家。以下是我近3个月积累的考公热点，请帮我建立“热点关联网络”，让我理解它们之间的逻辑关系。\n═══════════════════════════\n【我积累的热点清单】：\n1. [如“新质生产力”]\n2. [如“以旧换新政策”]\n3. [如“基层治理现代化”]\n4. [如“乡村振兴”]\n5. [如“就业优先战略”]\n6. [如“数字经济”]\n7. [如“共同富裕”]\n8. [如“生态文明建设”]\n9. [如“教育强国”]\n10. [如“高水平对外开放”]\n═══════════════════════════\n请输出：\n一、热点关联图谱\n用文字描述这些热点之间的逻辑关系：\n- 哪些热点是“同一主题的不同维度”？（如“新质生产力”“数字经济”“以旧换新”都属于“经济高质量发展”主题）\n- 哪些热点是“因果关系”？（如“新质生产力”→“产业升级”→“就业结构变化”→“就业优先战略”）\n- 哪些热点是“并列关系”？（如“乡村振兴”“基层治理”“共同富裕”都属于“社会治理”主题）\n二、主题归类\n把这些热点归入3-5个“大主题”：\n- 大主题1：（如“经济高质量发展”） → 包含热点：______\n- 大主题2：（如“社会治理现代化”） → 包含热点：______\n- 大主题3：……\n三、“一题多热点”的申论考法\n如果申论大作文涉及2个以上热点的组合，可能的题目是什么？\n- 组合1：（如“新质生产力+乡村振兴”） → 可能的题目+立意\n- 组合2：（如“数字经济+基层治理”） → 可能的题目+立意\n- 组合3：……\n四、“万能衔接句”\n给我5句“万能衔接句”，让我在申论中把不同热点自然连接起来：\n（如：“从‘新质生产力’的技术突破，到‘以旧换新’的消费激活，再到‘就业优先’的民生保障，三者构成了经济高质量发展的完整闭环。”）\n五、面试中的“热点串联”\n如果面试中被问到某个热点，我怎么自然地“串联”其他热点，体现知识广度？给出2个示范。"
+      },
+      {
+        "章节": "第5节：AI时政热点解读（上）——热点筛选与考点转化",
+        "小节": "7.2",
+        "标题": "“热点深度追问”Prompt",
+        "类型": "进阶Prompt",
+        "适用场景": "你看了AI的考点转化报告，但感觉“还是没真正理解”，需要用更通俗的方式再讲一遍",
+        "Prompt模板": "你是一位擅长“把复杂政策讲给普通人听”的公考老师。以下这个时政热点，我看了分析但还是没完全理解。请用最通俗的方式重新给我讲一遍。\n═══════════════════════════\n【热点】：[如“新质生产力”]\n【我目前的理解】：[如“我知道它是关于科技创新的，但具体和‘科技创新’有什么区别我搞不清”]\n【我具体不懂的地方】：[如“为什么说它是‘生产力’而不是‘科技政策’？它和‘高质量发展’是什么关系？”]\n═══════════════════════════\n请：\n1. 用一个生活中的故事/类比，让我“秒懂”这个概念\n2. 用“它是什么→它不是什么→它为什么重要→它怎么落地”的逻辑重新讲一遍\n3. 给我3个“判断标准”：考场上看到什么表述，我就知道“这是在说新质生产力”\n4. 给我1个“反面例子”：什么样的理解是“错的”（帮我避免常见误解）\n5. 最后用一句话总结：如果我在考场上只能记住一句话，应该是什么？"
+      },
+      {
+        "章节": "第5节：AI时政热点解读（上）——热点筛选与考点转化",
+        "小节": "7.3",
+        "标题": "“热点+本省特色”Prompt",
+        "类型": "进阶Prompt",
+        "适用场景": "你考的是省考，需要同时掌握“中央政策”和“本省特色政策”",
+        "Prompt模板": "你是一位精通[在此填写省份，如“浙江省”]省考的公考教研专家。请帮我梳理“中央政策+本省特色”的时政考点。\n═══════════════════════════\n【目标考试】：[如“2026年浙江省考”]\n【时间范围】：[如“近6个月”]\n【中央层面的重点政策】：[列出你已知的2-3个，如“新质生产力、以旧换新、基层治理现代化”]\n═══════════════════════════\n请输出：\n一、本省特色政策/成就（近6个月）\n- 本省有哪些“走在全国前列”的政策/做法？\n- 本省领导近期的重要讲话/调研重点是什么？\n- 本省有哪些“可能被申论材料引用”的典型案例？\n二、“中央精神+本省实践”的结合点\n- 中央的（某政策）在本省是怎么落地的？\n- 本省的（某做法）体现了中央的什么精神？\n- 如果申论考“本省实践”，可能的材料方向是什么？\n三、本省省考的特色考法\n- 本省省考申论有没有“偏好的主题方向”？（如：浙江偏重“数字经济”“共同富裕”）\n- 本省常识题有没有“本省特色考点”？（如：本省的历史文化、地理特征、重大工程）\n四、本省热点素材包\n- 3个本省典型案例（地点+做法+成效，每个80字）\n- 5个本省相关数据\n- 3句本省领导的金句表述"
+      },
+      {
+        "章节": "第6节：AI时政热点解读（下）——申论素材转化与预测训练",
+        "小节": "4.1",
+        "标题": "素材包生成Prompt（核心）",
+        "类型": "核心Prompt",
+        "Prompt模板": "你是一位有15年公考申论教研经验的写作教练，精通申论评分标准和高分作文的写作方法。请围绕以下时政热点，生成一份完整的“申论写作素材包”，让我在考场上能直接调用，写出有分析、有数据、有案例、有层次的高分段落。\n═══════════════════════════\n【热点主题】：[如“新质生产力”]\n【适用场景】：[如“申论大作文（主要）+ 概括题/分析题/对策题（辅助）”]\n【目标考试】：[如“2026年国考地市级”]\n【我已有的素材】（可选）：[如“我已经知道‘研发经费投入强度2.68%’这个数据，不用重复”]\n【我的写作弱点】（可选）：[如“我写对策总是写‘加强’‘完善’，请给我具体的对策表述”]\n═══════════════════════════\n请输出：\n一、概念精准界定（100字以内，可直接用于申论开头）\n- 用“是什么+不是什么+核心特征”的结构\n- 语言精准、凝练，可直接抄入作文\n- 避免文件语言的堆砌，要有“自己的理解”\n二、背景与意义（150字）\n- 为什么“现在”提出？（时代背景，2句话）\n- 解决什么“老问题”？（痛点，1句话）\n- 有什么“新意义”？（价值，2句话）\n- 可直接用于大作文的“背景段”或“意义分析段”\n三、当前面临的问题/挑战（3-4条）\n- 每条一句话，可直接用于“问题分析”段\n- 要求：具体、有画面感，避免“不够”“不足”“有待加强”等空话\n- 格式：（问题现象） + （导致的后果）\n- 示例格式：“科研成果‘沉睡’在实验室，转化率仅为30%，大量创新投入未能转化为现实生产力”\n四、原因分析（3条，有层次）\n- 制度层面：……\n- 技术/市场层面：……\n- 人才/观念层面：……\n- 每条2句话：原因+表现\n- 可直接用于“原因分析”段\n五、对策建议（5条）\n- 每条格式：（具体做法） + （预期效果）\n- 要求：具体、可操作、有画面感\n- 禁止使用：“加强”“完善”“推动”“促进”等空话开头\n- 正确示范：“建立‘揭榜挂帅’机制，让企业出题、科学家答题，将科研成果转化周期从平均5年压缩至2年”\n- 错误示范：“加强科技创新，完善体制机制，推动成果转化”\n六、可用金句（8句）\n- 标注出处（如“2026年政府工作报告”“二十大报告”“XX领导讲话”）\n- 按使用场景分类：\n  - 用于开头（2句）\n  - 用于论证（3句）\n  - 用于结尾（2句）\n  - 用于过渡（1句）\n- 每句附“使用示范”（展示怎么把金句嵌入段落中）\n七、典型案例（3个）\n- 每个案例80字以内\n- 格式：（地点/主体） + （具体做法） + （量化成效）\n- 要求：不同地区/不同领域/不同规模（避免3个案例都是“某市做了某事”）\n- 每个案例附“适用角度”（这个案例可以用在什么论点的论证中）\n八、论证示范段（2段，每段150字左右）\n- 第1段：用“观点→分析→数据→回扣”结构\n- 第2段：用“观点→案例→分析→回扣”结构\n- 要求：展示如何将以上素材（金句、数据、案例）自然融入写作\n- 在段落中用【】标注“这里用了哪个素材”\n九、大作文分论点表述（3组）\n- 每组含：总论点 + 3个分论点\n- 3组立意方向不同（如：是什么/为什么/怎么做；或：技术/制度/人才；或：过去/现在/未来）\n- 分论点要求：\n  - 句式整齐（对仗或排比）\n  - 有“动词+对象+效果”的结构\n  - 避免“要……要……要……”的空洞表述\n- 每组附“适用题目”（什么样的作文题适合用这组立意）\n十、易错提醒\n- 考生写这个主题最容易犯的3个错误\n- 每个错误附“错误示范”和“正确示范”\n- 如：“把新质生产力等同于科技创新（错）→ 新质生产力包含技术创新、制度创新、模式创新三个维度（对）”"
+      },
+      {
+        "章节": "第6节：AI时政热点解读（下）——申论素材转化与预测训练",
+        "小节": "4.3",
+        "标题": "“热点+主题”组合Prompt",
+        "类型": "核心Prompt",
+        "Prompt模板": "你是一位有15年公考申论教研经验的专家。请分析以下“热点+主题”组合在申论中的考法，并生成组合素材。\n═══════════════════════════\n【热点】：[如“新质生产力”]\n【主题】：[如“基层治理”]\n【目标考试】：[如“2026年国考地市级”]\n═══════════════════════════\n请输出：\n一、结合点分析\n- 这两个概念为什么能“组合”在一起？（底层逻辑是什么？）\n- 结合点在哪里？（如：“新质生产力+基层治理”的结合点是“数字技术赋能基层治理”）\n- 用1句话概括两者的关系\n二、大作文出题预测\n- 如果出大作文，可能的题目是什么？（2-3个）\n- 每个题目附：审题要点（关键词是什么？不能漏掉什么？）\n三、立意方案（2种）\n- 方案A：\n  - 总论点：……\n  - 分论点1：……\n  - 分论点2：……\n  - 分论点3：……\n- 方案B：\n  - 总论点：……\n  - 分论点1：……\n  - 分论点2：……\n  - 分论点3：……\n四、组合论证段（2段，每段150字）\n- 第1段：以“热点”为主，“主题”为辅\n- 第2段：以“主题”为主，“热点”为辅\n- 展示如何在一段话中自然融合两个概念\n五、组合开头示范\n- 写2种不同风格的开头（每种100字）：\n  - 开头A：数据切入型\n  - 开头B：案例切入型\n六、组合素材补充\n- 3个“热点+主题”交叉的典型案例\n- 3句同时涉及两个概念的金句\n- 2个关键数据"
+      },
+      {
+        "章节": "第6节：AI时政热点解读（下）——申论素材转化与预测训练",
+        "小节": "7.1",
+        "标题": "“素材升级”Prompt",
+        "类型": "进阶Prompt",
+        "适用场景": "写了一段申论，感觉“有素材但写得平庸”，需要AI帮你“升级”",
+        "Prompt模板": "你是一位有15年公考申论阅卷经验的专家。以下是我写的一段申论论证段，请帮我“升级”为高分段落。\n═══════════════════════════\n【我写的段落】：[在此粘贴你写的段落，如：“当前，我国科技创新取得了很大成就。我们要继续加大研发投入，推动科技成果转化，发展新质生产力，实现高质量发展。”]\n【这段对应的热点】：[如“新质生产力”]\n【这段在作文中的位置】：[如“第二个分论点的论证段”]\n【我的分论点】：[如“以要素创新性配置激活发展动能”]\n═══════════════════════════\n请输出：\n一、我的段落诊断\n- 这段话的问题在哪？（逐句分析）\n- 为什么阅卷老师会给低分？\n- 具体缺了什么？（数据？案例？分析？层次？）\n二、升级示范（3个版本）\n- 版本A（稳健型）：在我的基础上修改，保留我的思路，补充数据和案例\n- 版本B（进阶型）：重新组织结构，用“观点→分析→数据→案例→回扣”\n- 版本C（高分型）：用更有文采的表述，加入对比、设问等修辞\n三、升级技巧总结\n- 从我的段落→高分段落，具体改了哪些地方？\n- 这些“升级技巧”我下次怎么自己用？\n- 给我3个“万能升级手法”（如：加数据对比、加案例细节、加反面论证）\n四、仿写练习\n- 给我1个类似的话题，让我用“升级后的结构”自己写一段\n- 我写完后你帮我评估"
+      },
+      {
+        "章节": "第6节：AI时政热点解读（下）——申论素材转化与预测训练",
+        "小节": "7.2",
+        "标题": "“一材多用”Prompt",
+        "类型": "进阶Prompt",
+        "适用场景": "积累了很多素材，但考场上“想不起来用”，需要训练“同一个素材在不同语境下的多种用法”",
+        "Prompt模板": "你是一位公考申论写作教练。以下是我积累的1个案例和1个数据，请帮我训练“一材多用”——展示同一个素材在不同论点、不同题型、不同语境下怎么使用。\n═══════════════════════════\n【案例】：[如“浙江杭州‘城市大脑’项目，整合1300个数据接口，交通信号灯配时效率提升15%，救护车到达时间缩短50%”]\n【数据】：[如“2025年我国研发经费投入强度达2.68%，超过欧盟国家平均水平”]\n═══════════════════════════\n请输出：\n一、这个案例可以用在哪些论点中？（至少5种）\n- 论点1：（如“数字技术赋能基层治理”） → 这个案例怎么嵌入？（写1-2句示范）\n- 论点2：（如“新质生产力的实践样本”） → 怎么嵌入？\n- 论点3：（如“以人民为中心的发展理念”） → 怎么嵌入？\n- 论点4：（如“从管理到治理的转变”） → 怎么嵌入？\n- 论点5：（如“科技向善”） → 怎么嵌入？\n二、这个数据可以用在哪些语境中？（至少4种）\n- 语境1：（如“论证‘投入不足’”） → 怎么用？（“2.68%看似不低，但与发达国家3%+相比仍有差距”）\n- 语境2：（如“论证‘投入已够，问题在转化’”） → 怎么用？（“2.68%已超过欧盟平均，但转化率仅30%”）\n- 语境3：（如“论证‘进步显著’”） → 怎么用？\n- 语境4：（如“论证‘仍需努力’”） → 怎么用？\n三、“反面用法”\n- 这个案例/数据能不能“反着用”？（如：用来说明“问题”而非“成就”）\n- 怎么反着用？写1-2句示范。\n四、“组合用法”\n- 这个案例+这个数据，能不能在同一段话中组合使用？\n- 写一段100字的示范。\n五、“考场快速调用”训练\n- 给我3个不同的分论点，我限时3分钟，写出“这个案例/数据怎么嵌入”\n- 我写完后你帮我评估：用得对不对？自然不自然？"
+      },
+      {
+        "章节": "第7节：AI行测错题分析（上）——错因诊断与精准归因",
+        "小节": "4.1",
+        "标题": "单题错因诊断Prompt",
+        "类型": "核心Prompt",
+        "Prompt模板": "你是一位有10年公考行测教研经验的专家，精通各模块的解题方法和常见错误类型。请对我的错题进行“错因诊断”，帮我精确找到“我为什么错”。\n═══════════════════════════\n【题目】：[在此粘贴题目原文，包括题干和所有选项]\n【我的答案】：[在此填写你选的选项，如“A”]\n【正确答案】：[在此填写正确选项，如“B”]\n【我当时的思路】：[（选填）在此用3-5句话描述你当时为什么选了这个答案。如：“我选A是因为……我觉得B是……C和D我排除了因为……”]\n═══════════════════════════\n请输出：\n一、错因精准定位\n- 我的错误发生在哪个环节？（审题/理解题意/知识储备/解题方法/推理过程/排除干扰项/时间压力）\n- 具体错在哪一步？（如：“你在排除B选项时，误将‘部分削弱’判断为‘无关选项’”）\n- 用一句话概括我的核心错误：______\n二、我的思路 vs 正确思路\n| 步骤 | 我的思路 | 正确思路 | 偏差在哪 |\n|------|----------|----------|----------|\n| 第1步（审题） | …… | …… | …… |\n| 第2步（分析） | …… | …… | …… |\n| 第3步（排除） | …… | …… | …… |\n| 第4步（选定） | …… | …… | …… |\n三、干扰项分析\n- 我选的错误选项（X），它的“陷阱”是什么？（如：偷换概念/以偏概全/因果倒置/程度不当）\n- 正确选项（Y），它的“正确逻辑”是什么？\n- 我为什么被X骗了？（如：X的前半句和原文一致，但后半句偷换了主语）\n四、同类错误预警\n- 这种错误类型叫什么？（如：“偷换概念型干扰项识别失败”）\n- 这种错误在行测中常见吗？通常出现在什么题型中？\n- 下次遇到同类题，我应该怎么避免？（给出1-2条具体可操作的检查方法）\n五、即时验证\n请出1道同类型的题目（同样的错误陷阱），让我立刻验证是否真的理解了。\n- 题目：\n- 选项：\n- 正确答案：\n- 解析：（先不要看，自己做完再看）"
+      },
+      {
+        "章节": "第7节：AI行测错题分析（上）——错因诊断与精准归因",
+        "小节": "7.1",
+        "标题": "隐性错误诊断Prompt",
+        "类型": "进阶Prompt",
+        "适用场景": "有些题“看解析觉得很简单，但当时就是选错了”，这类题往往暴露了最深层的思维习惯问题",
+        "Prompt模板": "你是一位有10年公考行测教研经验的专家。以下这道题，我“看解析觉得很简单”，但当时就是选错了。请帮我诊断这种“明明会但就是错”的深层原因。\n═══════════════════════════\n【题目】：[粘贴题目原文]\n【我的答案】：[我的答案，如“C”]\n【正确答案】：[正确答案，如“A”]\n【我当时的思路】：[描述你当时怎么想的]\n【我看解析后的感受】：[如“我觉得A明显是对的，不知道为什么当时没选”]\n═══════════════════════════\n请分析：\n1. 我当时的思路中，有没有“思维惯性”在作怪？（如：看到“所有”就条件反射认为是错的）\n2. 我是不是被“第一印象”锁定了？（如：先看到C觉得对，就没认真看A）\n3. 我是不是在“两个选项犹豫”时，总是选错的那个？（如：总是在A和C之间犹豫，总选C）\n4. 这种“明明会但选错”的模式，可能反映了我什么深层问题？\n5. 给出1个“做题时的强制检查动作”，帮我打破这个思维惯性"
+      },
+      {
+        "章节": "第7节：AI行测错题分析（上）——错因诊断与精准归因",
+        "小节": "7.3",
+        "标题": "考前“错误模式”快速复盘Prompt",
+        "类型": "进阶Prompt",
+        "适用场景": "考前1-3天，想快速回顾“高频错误模式”，确保考场上不犯老错误",
+        "Prompt模板": "你是一位公考行测备考教练。我明天就要考试了，请帮我做一次“考前错误模式快速复盘”。\n═══════════════════════════\n【我的高频错误模式】（从之前的错因诊断中总结）：\n模式1：[如“言语题中，总是被‘偷换概念’型干扰项骗”]\n模式2：[如“逻辑题中，总是把‘充分条件’和‘必要条件’搞混”]\n模式3：[如“资料分析中，总是忘记‘同比’和‘环比’的区别”]\n【我之前的具体错题示例】（每个模式举1道）：\n模式1示例：[粘贴题目+你的错误思路1]\n模式2示例：[粘贴题目+你的错误思路2]\n模式3示例：[粘贴题目+你的错误思路3]\n═══════════════════════════\n请输出：\n一、“考场提醒卡”\n针对我的每个错误模式，给出1条“考场上看到什么就要警觉”的提醒：\n- 模式1提醒：当你看到____时，停下来检查____\n- 模式2提醒：当你看到____时，先____再选答案\n- 模式3提醒：当你看到____时，先确认____\n二、“3秒检查法”\n针对每个错误模式，给出一个“3秒内能完成的检查动作”：\n（考场上没时间做复杂分析，但3秒的检查可以避免80%的重复错误）\n三、“最后5道题”策略\n如果考试最后5分钟还剩5道题没做，我应该：\n- 先做哪类题？（基于我的错误模式，哪类题我最容易“慌了选错”？）\n- 怎么在时间压力下避免犯老错误？\n四、心理暗示\n给我3句“考前心理暗示”，帮我避免因为紧张而犯老错误。"
+      },
+      {
+        "章节": "第8节：AI行测错题分析（中）——解题技巧提炼与变式训练",
+        "小节": "4.1",
+        "标题": "技巧提炼Prompt（核心）",
+        "类型": "核心Prompt",
+        "Prompt模板": "你是一位有10年公考行测教研经验的专家，精通各模块的解题方法论。请帮我从以下题目中提炼“可复用的解题技巧”，让我以后遇到同类题能直接调用，不用每次重新想。\n═══════════════════════════\n【题目】：\n题目：[在此粘贴题目原文]\n题型：[如“判断推理-削弱加强题”]\n我的答案：[我的答案，如“B”]\n正确答案：[正确答案，如“D”]\n我的解题方法：[2-3句话描述你用了什么方法，如“我先找论点，然后看哪个选项能削弱”]\n\n═══════════════════════════\n请输出：\n一、这类题的“通用解题框架”\n- 这类题考的是什么能力？（如：识别论证结构、判断削弱力度）\n- 解题的标准步骤是什么？（第1步做什么→第2步做什么→第3步做什么）\n- 每一步的“关键动作”是什么？（如：第1步“找论点”的关键动作是“找‘因此/所以/由此可见’后面的句子”）\n二、核心技巧提炼\n从这些题目中，提炼出2-3个“核心技巧”，每个技巧按以下格式：\n【技巧名称】：（如“削弱力度排序法”）\n【适用场景】：（什么时候用这个技巧？看到什么信号词就要触发？）\n【操作步骤】：（具体怎么做？1-2-3步）\n【易错点】：（用这个技巧时最容易犯什么错？）\n【口诀/记忆法】：（一句话帮我记住这个技巧）\n三、我的方法 vs 最优方法\n- 我目前用的方法是什么？\n- 这个方法的问题在哪？（如：效率低/容易出错/不适用于所有变体）\n- 最优方法是什么？比我的方法好在哪？\n- 从我的方法过渡到最优方法，我需要改变什么习惯？\n四、变体识别\n这类题在考试中有哪些“变体”？（题面不同但本质相同）\n- 变体1：（描述） → 用同一个技巧怎么处理\n- 变体2：（描述） → 用同一个技巧怎么处理\n- 变体3：（描述） → 需要注意什么不同\n五、即时验证（变式训练）\n请出3道变式题，让我验证是否真的掌握了这个技巧：\n- 变式题1：（基础难度，直接套用技巧）\n- 变式题2：（中等难度，题面有变化但本质相同）\n- 变式题3：（较高难度，包含一个“陷阱”，看我能不能识别）\n每道题格式：题目+选项+正确答案+解析（解析附在最后，我做完再看）"
+      },
+      {
+        "章节": "第8节：AI行测错题分析（中）——解题技巧提炼与变式训练",
+        "小节": "7.1",
+        "标题": "“一题多解”对比Prompt",
+        "类型": "进阶Prompt",
+        "适用场景": "同一道题，我用了一种方法做对了，但想知道有没有更优方法",
+        "Prompt模板": "你是一位有10年公考行测教研经验的专家。以下这道题，我用了一种方法做对了，但我觉得可能不是最优方法。请帮我对比分析。\n═══════════════════════════\n【题目】：[在此粘贴题目原文]\n【题型】：[如“数量关系-排列组合”]\n【我的方法】：[在此描述你的解题方法，如“我用的是枚举法，把所有可能的情况列出来，然后数”]\n【我的用时】：[如“大约3分钟”]\n【教材/APP给的方法】（如果有的话）：[在此粘贴解析中的方法，如“解析用的是插空法，C(5,2)=10”]（如果没有，可以写“不知道有没有更优方法”）\n═══════════════════════════\n请输出：\n一、方法对比\n| 维度 | 我的方法 | 最优方法 |\n|------|----------|----------|\n| 正确率 | | |\n| 速度 | | |\n| 适用范围 | | |\n| 考场可行性 | | |\n| 学习成本 | | |\n二、我的方法的问题\n- 在什么情况下我的方法会失效？（如：数据变大时枚举不现实）\n- 我的方法有没有“改良版”？（保留我的思路，但优化某个步骤）\n三、最优方法的教学\n- 用“大白话”给我讲一遍最优方法（不要一上来就公式）\n- 这个方法的“触发信号”是什么？（看到什么特征→用这个方法）\n- 给我3道由易到难的练习题，让我从“我的方法”过渡到“最优方法”\n四、考场建议\n- 考场上我应该用哪种方法？为什么？\n- 如果时间紧张，有没有“保底方法”？（不一定最快，但一定能做对）"
+      },
+      {
+        "章节": "第9节：AI行测错题分析（下）——薄弱模块专项突破与限时提分",
+        "小节": "4.1",
+        "标题": "薄弱模块诊断Prompt（核心）",
+        "类型": "核心Prompt",
+        "Prompt模板": "你是一位有10年公考行测教研经验的备考规划师，精通各模块的提分策略和时间分配优化。请根据我的做题数据，帮我做“薄弱模块精准诊断”并制定“专项突破计划”。\n═══════════════════════════\n【我的基本信息】：\n- 目标考试：[如“2026年国考地市级”/“2026年XX省省考”]\n- 目标分数：[如“行测70分”/“总分140分”]\n- 剩余备考时间：[如“还有8周”/“还有3个月”]\n- 每天可用于行测的时间：[如“2小时”/“3小时”]\n【我目前的正确率数据】：\n[在此粘贴你的各模块/各题型正确率数据。格式参考：\n言语理解：主旨题75%，细节题60%，语句排序50%，逻辑填空70%\n判断推理：图形推理65%，定义判断70%，类比推理80%，逻辑判断55%（削弱加强45%，翻译推理60%）\n数量关系：整体40%\n资料分析：整体65%\n常识判断：整体55%]\n【我目前的时间分配】：\n[如“每天2小时：言语30分钟、逻辑30分钟、数量20分钟、资料30分钟、常识10分钟”]\n【我目前最大的困惑】（选填）：\n[如“我数量关系总是做不完，考试时最后15题全是蒙的”/“我资料分析正确率还行但太慢，每次要35分钟”]\n═══════════════════════════\n请输出：\n一、薄弱模块诊断\n按“提分潜力”排序（不是按“正确率从低到高”排序）：\n| 优先级 | 模块/题型 | 目前正确率 | 目标正确率 | 预计提分 | 突破难度 | 建议投入时间占比 |\n|--------|-----------|-----------|-----------|----------|----------|----------------|\n说明：\n- “提分潜力”= 题量×可提升空间×突破难度系数\n- 为什么这样排优先级？（用2-3句话解释）\n二、核心短板深度分析\n针对排名前2的薄弱模块，分别分析：\n- 这个模块你弱在哪个“具体环节”？（不是“逻辑不好”，而是“削弱加强题中，你在‘力度排序’环节失败”）\n- 这个短板的原因是什么？（知识盲区/方法不对/练习不够/时间不够）\n- 如果不解决，考场上会怎样？（如：“你会在这10道题上花20分钟，导致后面资料分析没时间做”）\n三、4周专项突破计划\n按周制定详细计划：\n【第1周】：重点突破\n- 周一：\n- 周二：……\n- ……\n- 周日：\n- 本周目标：\n【第2周】：重点突破 + 巩固模块A\n- …..\n【第3周】：……\n【第4周】：……\n四、时间分配优化建议\n- 我目前的时间分配有什么问题？\n- 优化后的时间分配应该是什么？\n- 哪些模块可以“少花时间但保持水平”？哪些必须“集中火力突破”？\n五、考场时间分配策略\n- 120分钟内，各模块建议用时是多少？\n- 做题顺序建议（先做什么后做什么）\n- 遇到不会的题，什么时候“跳过”？什么时候“蒙一个”？\n- 最后10分钟应该做什么？\n六、每周检测标准\n- 每周日我应该做什么来检测本周的训练效果？\n- 达到什么标准说明“这个模块突破了”？\n- 如果没达标，下周怎么调整？"
+      },
+      {
+        "章节": "第9节：AI行测错题分析（下）——薄弱模块专项突破与限时提分",
+        "小节": "4.3",
+        "标题": "限时模拟训练Prompt",
+        "类型": "核心Prompt",
+        "Prompt模板": "你是一位公考行测模考教练。请帮我做一次“限时专项模拟训练”。\n═══════════════════════════\n【训练模块】：[如“判断推理-削弱加强题”]\n【训练目标】：[如“10道题，限时15分钟，正确率达到70%”]\n【我的当前水平】：[如“目前正确率55%，主要问题是‘力度排序’判断不准”]\n【我近期提炼的技巧】：[如“技巧1：找论点看‘因此/所以’后面；技巧2：削弱力度排序‘否论>切联>否据>他因’”]\n═══════════════════════════\n请出10道[模块/题型]的模拟题，要求：\n一、题目设置\n- 难度分布：3道基础 + 4道中等 + 3道较难\n- 陷阱设置：至少3道题包含我常犯的错误陷阱（[如“偷换概念型干扰项”“他因削弱伪装成否定论据”]）\n- 题面多样性：覆盖不同的话题领域（经济/社会/科技/教育等），避免我“背题面”\n二、输出格式\n先输出10道题目（只有题目和选项，不要答案），让我限时做完。\n然后标注“===== 以下答案和解析，做完后再看 =====”\n再输出答案和逐题解析。\n三、解析要求\n每道题的解析包括：\n- 正确答案及理由\n- 各干扰项的“陷阱类型”\n- 该题对应的解题技巧（和我近期学的技巧对应）\n- 如果做错了，最可能的错误原因是什么\n四、做完后的评估\n我做完后会告诉你我的答案和用时，请帮我评估：\n- 正确率是否达标？\n- 用时是否合理？（平均每道题应该用多少时间？）\n- 错题的错误类型是什么？是“老问题”还是“新问题”？\n- 下一步训练建议"
+      },
+      {
+        "章节": "第9节：AI行测错题分析（下）——薄弱模块专项突破与限时提分",
+        "小节": "7.1",
+        "标题": "“考场时间分配”专项训练Prompt",
+        "类型": "进阶Prompt",
+        "适用场景": "平时做题正确率还行，但考场上总是“做不完”，需要专门训练时间管理",
+        "Prompt模板": "你是一位公考行测考场策略专家。我平时做题正确率还行，但考场上总是做不完。请帮我做“考场时间分配”专项训练。\n═══════════════════════════\n【我的情况】：\n- 考试总时间：[如“120分钟”]\n- 总题量：[如“135题（国考地市级）”]\n- 我目前各模块用时：[如“言语35分钟、逻辑30分钟、数量25分钟、资料30分钟、常识10分钟、涂卡5分钟 = 135分钟，超时15分钟”]\n- 我目前各模块正确率：[我目前各模块正确率，粘贴数据]\n- 我做不完的具体表现：[如“数量关系最后5题全是蒙的”/“资料分析最后2篇没时间看”]\n【我的做题习惯】：[如“我习惯按试卷顺序做，从言语开始”/“我遇到不会的题会犹豫很久”/“我资料分析每道都要精算”]\n═══════════════════════════\n请输出：\n一、时间分配诊断\n- 我目前的时间分配问题在哪？\n- 哪些模块“花太多时间但提分不多”？\n- 哪些模块“花太少时间但提分潜力大”？\n二、优化后的时间分配方案\n| 模块 | 题量 | 建议用时 | 平均每题用时 | 做题顺序 |\n|------|------|----------|-------------|----------|\n三、“跳过策略”\n- 什么情况下应该“跳过”一道题？（如：看了30秒没思路→跳过）\n- 跳过的题怎么处理？（标记→最后回来做/直接蒙）\n- 每个模块最多允许“跳过”几道题？\n四、“保底策略”\n- 如果时间严重不够（只剩20分钟还有30题没做），怎么“保底”？\n- 哪些题“蒙”的正确率最高？（如：常识题蒙C的概率略高）\n- 怎么在“蒙”的时候提高正确率？（如：排除1个明显错误的再蒙）\n五、限时模拟训练\n请帮我设计一次“考场时间分配模拟”：\n- 给我一套完整的模拟题（各模块题量按真实考试配比）\n- 我严格按你建议的时间分配做\n- 做完后我告诉你各模块实际用时和正确率\n- 你帮我评估时间分配是否合理，哪里需要调整"
+      },
+      {
+        "章节": "第9节：AI行测错题分析（下）——薄弱模块专项突破与限时提分",
+        "小节": "7.2",
+        "标题": "“强项保持”训练Prompt",
+        "类型": "进阶Prompt",
+        "适用场景": "正在集中突破弱项模块，但担心强项模块“生疏了”，需要一个“低时间投入但保持水平”的方案",
+        "Prompt模板": "你是一位公考行测备考教练。我目前正在集中突破弱项模块（[如“判断推理”]），但我不想让强项模块（[如“言语理解”，目前正确率75%]）生疏。请帮我设计一个“低时间投入的强项保持方案”。\n═══════════════════════════\n【强项模块】：[如“言语理解”]\n【目前正确率】：[如“75%”]\n【我可用的“保持”时间】：[如“每天15分钟”或“每两天20分钟”]\n【我担心生疏的具体题型】：[如“语句排序题，我本来就不太稳”]\n═══════════════════════════\n请输出：\n一、保持方案\n- 每天/每两天练什么？练多少道？\n- 重点练哪些题型？（不需要全练，只练“容易生疏”的）\n- 用什么方式练？（限时/不限时/只做不解析/做完看解析）\n二、“生疏预警”信号\n- 什么信号说明我的强项开始生疏了？（如：正确率连续3天低于70%）\n- 出现预警后怎么调整？\n三、每周“保持检测”\n- 每周做几道题来检测强项是否保持住了？\n- 正确率低于多少需要增加训练量？\n四、请出5道“保持训练题”\n- 难度：中等偏上（不需要太简单，但也不需要太难）\n- 覆盖我担心生疏的题型\n- 格式：题目+选项+答案+简要解析"
+      },
+      {
+        "章节": "第9节：AI行测错题分析（下）——薄弱模块专项突破与限时提分",
+        "小节": "7.3",
+        "标题": "考前2周“冲刺调整”Prompt",
+        "类型": "进阶Prompt",
+        "适用场景": "考前2周，不想再学新技巧，需要“调整状态、巩固已有能力、避免考前焦虑”",
+        "Prompt模板": "你是一位公考行测备考教练。我还有[如“14天”]就要考试了。请帮我制定“考前2周冲刺调整计划”。\n═══════════════════════════\n【我的目前水平】：\n- 各模块正确率：[粘贴最新数据]\n- 最近一次模考分数：[如“67分”]\n- 目标分数：[如“72分”]\n【我目前已掌握的技巧】：[列出你的技巧卡片清单，如“技巧1：削弱力度排序；技巧2：资料分析截位直除；技巧3：主旨题结构分析法……”]\n【我目前还存在的弱点】：[如“数量关系还是只能做对6/15”/“语句排序题还是不太稳”]\n【我的心理状态】：[如“有点焦虑，担心考场上发挥不好”/“比较平静，但怕最后两周退步”]\n═══════════════════════════\n请输出：\n一、考前2周总体策略\n- 这2周的关键词是什么？（如“巩固+调整+信心”，而非“学新东西”）\n- 每天的时间怎么分配？\n- 什么该做？什么不该做？（如：不该学新技巧、不该做太难的题打击信心）\n二、每日计划（14天）\n| 日期 | 上午 | 下午 | 晚上 | 备注 |\n|------|------|------|------|------|\n| 倒数第14天 | …… | …… | …… | |\n| …… | | | | |\n| 考试前一天 | …… | …… | …… | |\n三、“技巧卡片”复习计划\n- 哪些技巧卡片每天要看？（核心技巧）\n- 哪些技巧卡片隔天看？（辅助技巧）\n- 考前最后一天只看哪几张？\n四、模考安排\n- 这2周做几次完整模考？什么时候做？\n- 模考后怎么复盘？（不要“对完答案就完了”）\n- 最后一次模考安排在考前几天？\n五、考场“锦囊”\n- 基于我的弱点，考场上最需要注意的3件事是什么？\n- 遇到不会的题，我的“默认策略”是什么？\n- 如果考场上紧张了，怎么快速调整？\n六、心理建设\n- 考前焦虑是正常的吗？怎么看待？\n- 给我3句“考前心理暗示”\n- 考试当天早上的“启动仪式”建议（帮我进入状态）"
       }
-    });
+    ];
 
-    // Mobile menu toggle
-    function toggleMenu() {
-      const navLinks = document.getElementById('navLinks');
-      navLinks.classList.toggle('active');
+    // ================== 核心逻辑 ==================
+
+    // 1. Toast 通知功能
+    function showToast(message, type = 'default') {
+      const container = document.getElementById('toast-container');
+      const div = document.createElement('div');
+      div.className = `toast-msg ${type}`;
+      div.textContent = message;
+      container.appendChild(div);
+      setTimeout(() => div.remove(), 3000);
     }
 
-    // Smooth scroll & Close mobile menu on link click
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-      anchor.addEventListener('click', function (e) {
-        const targetId = this.getAttribute('href');
-        if (targetId === '#') return;
+    // 2. 状态管理
+    let state = { currentId: '', formData: {}, selectedAddons: new Set() };
 
-        const target = document.querySelector(targetId);
-        if (target) {
-          e.preventDefault();
-          target.scrollIntoView({ behavior: 'smooth' });
-          document.getElementById('navLinks').classList.remove('active');
-        }
+    // 3. 初始化菜单 (核心修改)
+    function initMenu() {
+      const box = document.getElementById('menu-box');
+      box.innerHTML = '';
+
+      const chapters = {};
+      PROMPT_DATA.forEach(item => {
+        if (!chapters[item.章节]) chapters[item.章节] = [];
+        chapters[item.章节].push(item);
       });
-    });
 
-    // Scroll fade-in animation with Intersection Observer
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-        }
-      });
-    }, { threshold: 0.1 });
+      // 用于记录第一个有效的菜单项，以便默认选中
+      let firstValidItem = null;
 
-    document.querySelectorAll('.fade-in').forEach(el => {
-      observer.observe(el);
-    });
+      for (let name in chapters) {
+        const sec = document.createElement('div');
+        sec.innerHTML = `<div class="chapter-title">${name}</div>`;
 
-    // FAQ Accordion Toggle
-    function toggleFaq(element) {
-      const faqItem = element.parentElement;
-      // 可选：如果希望每次只展开一个，可以取消下面几行的注释
-      /*
-      document.querySelectorAll('.faq-item').forEach(item => {
-          if(item !== faqItem) item.classList.remove('active');
-      });
-      */
-      faqItem.classList.toggle('active');
+        chapters[name].forEach(item => {
+          if (item.类型 === '追加Prompt片段') return;
+
+          const div = document.createElement('div');
+          div.className = 'menu-item';
+          const id = `${item.章节}-${item.小节}`;
+
+          let tag = '';
+          if (item.类型 === '核心Prompt') tag = '<span class="menu-tag core">核心</span>';
+          else if (item.类型 === '进阶Prompt') tag = '<span class="menu-tag advanced">进阶</span>';
+
+          div.innerHTML = `${item.小节} ${item.标题} ${tag}`;
+
+          // 绑定点击事件
+          div.onclick = (e) => selectItem(id, item, e.currentTarget);
+
+          // 如果还没有记录过第一项，记录下当前项（DOM元素和数据）
+          if (!firstValidItem) {
+            firstValidItem = { element: div, data: item, id: id };
+          }
+
+          sec.appendChild(div);
+        });
+        box.appendChild(sec);
+      }
+
+      // 修改点：初始化完成后，自动选中第一项
+      if (firstValidItem) {
+        selectItem(firstValidItem.id, firstValidItem.data, firstValidItem.element);
+      }
     }
 
-    // SEO Schema Markup (JSON-LD) for GEO/SEO Optimization
-    const faqSchema = {
-      "@context": "https://schema.org",
-      "@type": "FAQPage",
-      "mainEntity": [
-        {
-          "@type": "Question",
-          "name": "什么是 DeepSeek Exporter？它有哪些主要功能？",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "DeepSeek Exporter 是一款专为 DeepSeek 网页版开发的效率浏览器插件。它的核心功能是一键将 DeepSeek 的聊天记录导出为 Word (.docx)、PDF、Markdown、HTML、ipynb、JSON 和 PNG 等多种格式。此外，它还集成了深度思考过程导出、批量导出、文字高亮标注、本地收藏夹、私密云盘以及无痕加密模式等高级知识管理功能。"
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "如何将 DeepSeek 对话导出为 Word 或 PDF 文档？",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "安装 DeepSeek Exporter 插件后，在 DeepSeek 网页端打开你想导出的对话，点击插件图标或对话旁的导出按钮，在弹出的菜单中选择你需要的格式（如 Word 或 PDF），即可一键下载保存到本地。插件会自动处理排版，无需复杂的配置。"
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "导出的文档会保留代码高亮和 LaTeX 数学公式吗？",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "会的。DeepSeek Exporter 采用了高级文档渲染引擎，无论是导出为 Word、PDF 还是 Markdown，都能完整保留原有的代码语法高亮颜色、LaTeX 数学公式的正确排版，以及复杂表格的层级结构。"
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "可以导出 DeepSeek 的“深度思考”过程吗？",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "完全可以。当你使用 DeepSeek-R1 等深度思考模式时，插件支持将 AI 的“思考过程”一并导出。这在整理学术复盘笔记、逻辑推演记录或技术分析时非常实用。"
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "DeepSeek Exporter 支持哪些浏览器安装？",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "我们全面支持主流浏览器，包括 Google Chrome、Microsoft Edge、360 极速/安全浏览器以及 Firefox 火狐浏览器。你可以直接在对应浏览器的官方扩展商店中搜索进行免费安装。"
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "使用插件和无痕模式，我的隐私和数据安全吗？",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "非常安全。插件本身注重本地化体验，开启“无痕模式”后，你的所有对话数据、高亮标注和操作记录都会在本地进行高强度加密处理，云端绝对不会存储任何信息。从技术底层 100% 保护了你的隐私与商业机密。"
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "插件提供的云盘功能有什么用？能实现 DeepSeek 的长期记忆吗？",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "是的。插件为每位用户提供大容量私密云盘。你不仅可以将导出的文档存入云盘方便跨设备随时下载，更核心的价值在于：你可以将云盘中的文档作为“知识库”上传给 DeepSeek。这打破了原有的上下文窗口限制，赋予 DeepSeek 专属于你的长期记忆能力。"
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "收藏夹和批量导出功能如何提升整理效率？",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "面对海量优质对话，插件提供了高效的闭环管理。你可以将高价值的回答一键加入本地收藏夹随时查阅，收藏夹内的内容支持批量导出为 Word 文档。同时，在对话列表中，你也可以多选多条对话进行批量导出，免去了逐一复制的繁琐。"
-          }
-        }
-      ]
-    };
+    // 4. 选中菜单
+    function selectItem(id, item, element) {
+      // 清除所有菜单的高亮样式
+      document.querySelectorAll('.menu-item').forEach(el => el.classList.remove('active'));
+      // 为当前选中的项添加高亮
+      element.classList.add('active');
 
-    // 动态将 Schema 注入到页面 head 中
-    const script = document.createElement('script');
-    script.type = 'application/ld+json';
-    script.text = JSON.stringify(faqSchema);
-    document.head.appendChild(script);
+      state.currentId = id;
+      state.formData = {};
+      state.selectedAddons = new Set();
+
+      renderMain(item);
+    }
+
+    // 5. 渲染主区域
+    function renderMain(item) {
+      const area = document.getElementById('main-area');
+
+      let formHtml = `
+        <div class="form-panel">
+            <div class="page-header">
+                <div class="page-title">${item.标题}</div>
+                <div class="meta-text" style="margin-top:8px;">
+                    <span class="meta-badge">${item.类型}</span>
+                    ${item.章节} - ${item.小节}
+                </div>
+                ${item.适用场景 ? `<div class="scene-tip"><strong>适用场景：</strong>${item.适用场景}</div>` : ''}
+            </div>
+            <div id="dynamic-forms"></div>
+            <div id="addon-area"></div>
+        </div>
+    `;
+
+      let previewHtml = `
+        <aside class="preview-panel">
+            <div class="preview-header">
+                <span class="preview-title">Prompt 预览</span>
+                <button class="btn-copy" onclick="copyAction()">
+                    复制
+                </button>
+            </div>
+            <div class="preview-body" id="preview-content"></div>
+        </aside>
+    `;
+
+      area.innerHTML = formHtml + previewHtml;
+
+      renderInputs(item["Prompt模板"]);
+      // renderAddons(item.小节);
+      updatePreview();
+    }
+
+    // 6. 渲染输入框
+    function renderInputs(template) {
+      const container = document.getElementById('dynamic-forms');
+      const regex = /\[(.*?)\]/g;
+      let match;
+      let html = '';
+
+      let idx = 0;
+      while ((match = regex.exec(template)) !== null) {
+        const raw = match[0];
+        const label = match[1];
+
+        const isLong = label.includes('粘贴') || label.includes('材料') || label.includes('作答');
+        const cleanLabel = label.replace(/^在此/, '').replace(/，如.*/, '');
+
+        html += `
+            <div class="input-group">
+                <label class="input-label">${cleanLabel}</label>
+                <${isLong ? 'textarea' : 'input'} 
+                    class="form-control" 
+                    placeholder="${label.includes('如') ? label : '...'}"
+                    oninput="updateData('${raw}', this.value)"
+                    rows="4"
+                ></${isLong ? 'textarea' : 'input'}>
+            </div>
+        `;
+        idx++;
+      }
+      container.innerHTML = html;
+    }
+
+    // 7. 渲染追加项
+    function renderAddons(currentSection) {
+      const container = document.getElementById('addon-area');
+      const addons = PROMPT_DATA.filter(p => p.关联 && p.关联.includes(currentSection));
+
+      if (addons.length === 0) {
+        container.innerHTML = '';
+        return;
+      }
+
+      let html = `<div class="addon-box"><h4>可选追加配置</h4>`;
+      addons.forEach(add => {
+        html += `
+            <div class="addon-item">
+                <input type="checkbox" id="add-${add.小节}" onchange="toggleAdd('${add.小节}', this.checked)">
+                <label for="add-${add.小节}">${add.标题}</label>
+            </div>
+        `;
+      });
+      html += '</div>';
+      container.innerHTML = html;
+    }
+
+    // 8. 更新数据
+    function updateData(key, val) {
+      state.formData[key] = val;
+      updatePreview();
+    }
+
+    // 9. 切换追加
+    function toggleAdd(section, checked) {
+      if (checked) state.selectedAddons.add(section);
+      else state.selectedAddons.delete(section);
+      updatePreview();
+    }
+
+    // 10. 更新预览
+    function updatePreview() {
+      const preview = document.getElementById('preview-content');
+      if (!preview) return;
+
+      const item = PROMPT_DATA.find(i => `${i.章节}-${i.小节}` === state.currentId);
+      if (!item) return;
+
+      let text = item["Prompt模板"];
+      for (let k in state.formData) {
+        text = text.split(k).join(state.formData[k]);
+      }
+
+      state.selectedAddons.forEach(addonId => {
+        const addon = PROMPT_DATA.find(i => i.小节 === addonId);
+        if (addon) {
+          text += `\n\n============ [追加] ${addon.标题} ============\n${addon["Prompt模板"]}`;
+        }
+      });
+
+      preview.innerText = text;
+    }
+
+    // 11. 复制动作
+    function copyAction() {
+      const text = document.getElementById('preview-content').innerText;
+      navigator.clipboard.writeText(text).then(() => {
+        showToast('复制成功！已保存到剪贴板', 'success');
+      }).catch(err => {
+        showToast('复制失败，请手动复制', 'error');
+      });
+    }
+
+    // 初始化
+    initMenu();
 
   </script>
 </body>
