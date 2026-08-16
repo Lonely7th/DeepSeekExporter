@@ -61,6 +61,10 @@ for (const file of htmlFiles) {
   for (const match of html.matchAll(/<img\b[^>]*>/gi)) {
     if (!/\balt="[^"]*"/i.test(match[0])) errors.push(`${rel}: image missing alt`);
   }
+  for (const match of html.matchAll(/<script\s+type="application\/ld\+json">([\s\S]*?)<\/script>/gi)) {
+    try { JSON.parse(match[1]); }
+    catch { errors.push(`${rel}: invalid JSON-LD`); }
+  }
   if (html.includes('m.aiwhaler.com/deepseek.html')) errors.push(`${rel}: legacy canonical URL remains`);
 }
 
@@ -73,6 +77,7 @@ if (!fs.existsSync(path.join(root, 'images', 'og-deepseek-exporter.jpg'))) error
 const homepage = fs.readFileSync(path.join(root, 'index.html'), 'utf8');
 if (!homepage.includes('SoftwareApplication')) errors.push('homepage missing SoftwareApplication schema');
 if ((homepage.match(/microsoftedge\.microsoft\.com\/addons\/detail/g) || []).length < 4) errors.push('homepage must keep prominent Edge install links');
+if ((homepage.match(/chromewebstore\.google\.com\/detail/g) || []).length < 4) errors.push('homepage must keep prominent Chrome online install links');
 if ((homepage.match(/https:\/\/deepseek\.aiwhaler\.com\//g) || []).length < 3) errors.push('homepage must keep offline install links');
 if (/<img[^>]+(?:banner-[1-7]|logo)\.png/i.test(homepage)) errors.push('homepage still serves uncompressed display PNG assets');
 

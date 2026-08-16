@@ -21,14 +21,21 @@
 /* Edge-first install path and retained offline installation */
 .edge-primary{color:#fff;background:linear-gradient(135deg,#0a63cf 0%,#078ca9 58%,#08a49b 100%);box-shadow:0 13px 30px rgba(4,116,158,.27)}
 .edge-primary:hover{box-shadow:0 17px 38px rgba(4,116,158,.36)}
+.chrome-primary{color:#172033;border:1px solid #cfd6e3;background:#fff;box-shadow:0 10px 25px rgba(31,42,69,.12)}
+.chrome-primary:hover{border-color:#9eabc0;box-shadow:0 15px 32px rgba(31,42,69,.18)}
 .button-icon{flex:0 0 auto;width:22px;height:22px;object-fit:contain}
 .nav-cta .button-icon{width:19px;height:19px}
+.nav-store-actions{display:flex;align-items:center;gap:8px}
+.nav-store-actions .button{padding-inline:13px}
 .hero-demo-link{display:inline-flex;align-items:center;gap:7px;margin-top:17px;color:var(--blue2);font-size:13px;font-weight:750}
 .button-offline{border-color:#c8d0df;background:rgba(255,255,255,.84)}
 .install-options{min-width:0}
+.install-store-actions,.final-store-actions{display:flex;align-items:center;flex-wrap:wrap;gap:10px}
 .install-privacy-link{display:inline-block;margin-top:18px}
 .edge-card{border-width:2px;border-color:#42aab4;background:linear-gradient(135deg,#f1fbff,#f4fffc);box-shadow:0 15px 35px rgba(5,127,154,.1)}
 .edge-card .badge{background:linear-gradient(135deg,#0a63cf,#08a49b)}
+.chrome-card{border-width:2px;border-color:#e0a337;background:linear-gradient(135deg,#fffaf0,#fff)}
+.chrome-card .badge{background:linear-gradient(135deg,#d94a3a,#e7a629);color:#fff}
 .offline-panel{display:flex;align-items:center;gap:15px;margin-top:14px;padding:19px 21px;border:1px dashed #aeb9cc;border-radius:17px;background:#f8fafc;transition:transform .2s,border-color .2s,background .2s}
 .offline-panel:hover{transform:translateY(-2px);border-color:#7888a6;background:#fff}
 .offline-icon{display:grid;place-items:center;flex:0 0 42px;width:42px;height:42px;border-radius:12px;color:#4e5c75;background:#e9edf4;font-size:21px;font-weight:900}
@@ -36,5 +43,4 @@
 .offline-panel strong{font-size:15px}.offline-panel small{color:var(--muted);font-size:11px}
 .offline-panel>span:last-child{color:var(--blue2);font-size:11px;font-weight:800;white-space:nowrap}
 .final-offline-link{display:inline-block;margin-top:13px;color:#e5e9ff;font-size:13px;font-weight:720;text-decoration:underline;text-underline-offset:4px}
-.mobile-sticky-cta.edge-primary{background:linear-gradient(135deg,#0a63cf,#08a49b)}
-@media(max-width:680px){.hero-demo-link{justify-content:center}.offline-panel{align-items:flex-start;flex-wrap:wrap}.offline-panel>span:last-child{margin-left:57px}.install-copy>.edge-primary{width:100%}.button-offline{font-size:13px}}
+@media(max-width:680px){.hero-demo-link{justify-content:center}.offline-panel{align-items:flex-start;flex-wrap:wrap}.offline-panel>span:last-child{margin-left:57px}.install-store-actions,.final-store-actions{display:grid;grid-template-columns:1fr;width:100%}.install-store-actions .button,.final-store-actions .button{width:100%}.button-offline{font-size:13px}.mobile-sticky-cta{padding:6px;background:rgba(255,255,255,.94);box-shadow:0 15px 45px rgba(24,35,66,.3);backdrop-filter:blur(14px)}.mobile-sticky-cta a{display:flex;align-items:center;justify-content:center;gap:7px;flex:1;min-height:43px;border-radius:10px;font-size:13px;font-weight:800}.mobile-sticky-cta .button-icon{width:19px;height:19px}.mobile-sticky-cta .edge-primary{background:linear-gradient(135deg,#0a63cf,#08a49b)}}
