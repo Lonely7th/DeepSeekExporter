@@ -69,6 +69,10 @@ for (const file of htmlFiles) {
 }
 
 const sitemap = fs.readFileSync(path.join(root, 'sitemap.xml'), 'utf8');
+const validChangefreq = new Set(['always', 'hourly', 'daily', 'weekly', 'monthly', 'yearly', 'never']);
+for (const match of sitemap.matchAll(/<changefreq>([^<]+)<\/changefreq>/g)) {
+  if (!validChangefreq.has(match[1])) errors.push(`sitemap has invalid changefreq: ${match[1]}`);
+}
 for (const canonical of canonicals.keys()) {
   if (!sitemap.includes(`<loc>${canonical}</loc>`)) errors.push(`sitemap missing ${canonical}`);
 }
