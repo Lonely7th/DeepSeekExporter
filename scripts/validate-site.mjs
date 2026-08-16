@@ -69,8 +69,12 @@ for (const canonical of canonicals.keys()) {
   if (!sitemap.includes(`<loc>${canonical}</loc>`)) errors.push(`sitemap missing ${canonical}`);
 }
 if (!fs.readFileSync(path.join(root, 'robots.txt'), 'utf8').includes('https://www.aibusgo.com/sitemap.xml')) errors.push('robots.txt missing sitemap URL');
-if (!fs.existsSync(path.join(root, 'images', 'og-deepseek-exporter.png'))) errors.push('missing Open Graph image');
-if (!fs.readFileSync(path.join(root, 'index.html'), 'utf8').includes('SoftwareApplication')) errors.push('homepage missing SoftwareApplication schema');
+if (!fs.existsSync(path.join(root, 'images', 'og-deepseek-exporter.jpg'))) errors.push('missing compressed Open Graph image');
+const homepage = fs.readFileSync(path.join(root, 'index.html'), 'utf8');
+if (!homepage.includes('SoftwareApplication')) errors.push('homepage missing SoftwareApplication schema');
+if ((homepage.match(/microsoftedge\.microsoft\.com\/addons\/detail/g) || []).length < 4) errors.push('homepage must keep prominent Edge install links');
+if ((homepage.match(/https:\/\/deepseek\.aiwhaler\.com\//g) || []).length < 3) errors.push('homepage must keep offline install links');
+if (/<img[^>]+(?:banner-[1-7]|logo)\.png/i.test(homepage)) errors.push('homepage still serves uncompressed display PNG assets');
 
 console.log(`Checked ${htmlFiles.length} HTML files and ${internalTargets.size} internal targets.`);
 if (warnings.length) console.log(`Warnings:\n- ${warnings.join('\n- ')}`);
